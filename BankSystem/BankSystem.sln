@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35222.181
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BankSystemAPI", "BankSystemAPI\BankSystemAPI.csproj", "{16A3C22B-873A-40A6-BF99-EF3F107B08FC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BankSystem.API", "BankSystemAPI\BankSystem.API.csproj", "{16A3C22B-873A-40A6-BF99-EF3F107B08FC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BankSystemDataAccess", "BankSystemDataAccess\BankSystemDataAccess.csproj", "{67B2B2E4-6097-4B40-A008-418EA8F9B36D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BankSystem.DataAccess", "BankSystemDataAccess\BankSystem.DataAccess.csproj", "{67B2B2E4-6097-4B40-A008-418EA8F9B36D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BankSystemBusiness", "BankSystemBusiness\BankSystemBusiness.csproj", "{B13CE670-FDDE-44A7-ACEE-1500721DF984}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BankSystem.Business", "BankSystemBusiness\BankSystem.Business.csproj", "{B13CE670-FDDE-44A7-ACEE-1500721DF984}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankSystemDTOs", "BankSystemDTOs\BankSystemDTOs.csproj", "{3C1CEA8A-E223-4F34-A595-7C57CF35B726}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BankSystem.DTOs", "BankSystemDTOs\BankSystem.DTOs.csproj", "{3C1CEA8A-E223-4F34-A595-7C57CF35B726}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankSystem.Validators", "BankSystem.Validators\BankSystem.Validators.csproj", "{02473D34-2C46-48FF-85F2-AD9D86E7DE15}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{3C1CEA8A-E223-4F34-A595-7C57CF35B726}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3C1CEA8A-E223-4F34-A595-7C57CF35B726}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3C1CEA8A-E223-4F34-A595-7C57CF35B726}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02473D34-2C46-48FF-85F2-AD9D86E7DE15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02473D34-2C46-48FF-85F2-AD9D86E7DE15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02473D34-2C46-48FF-85F2-AD9D86E7DE15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02473D34-2C46-48FF-85F2-AD9D86E7DE15}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

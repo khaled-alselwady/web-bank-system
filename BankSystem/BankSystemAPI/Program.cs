@@ -1,7 +1,11 @@
+using BankSystem.Validators.PersonValidators;
 using BankSystemBusiness.Mappers.PersonMapper;
 using BankSystemBusiness.Services;
 using BankSystemDataAccess.Data;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +21,12 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 builder.Services.AddAutoMapper(typeof(MappingPerson).Assembly);
 
+// Add FluentValidation services
+{
+    builder.Services.AddFluentValidationAutoValidation();
+    builder.Services.AddFluentValidationClientsideAdapters();
+    builder.Services.AddValidatorsFromAssemblyContaining<PersonValidator>();
+}
 builder.Services.AddScoped<PersonService>();
 
 var app = builder.Build();

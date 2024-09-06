@@ -45,6 +45,11 @@ namespace BankSystemAPI.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<PersonDetailsDto?>> Add([FromBody] CreateOrUpdatePersonDto newPerson)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             if (newPerson == null)
             {
                 return ApiResponseHelper.BadRequest("Person data is required.");
@@ -59,6 +64,11 @@ namespace BankSystemAPI.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<PersonDetailsDto?>> Update([FromRoute] int id, [FromBody] CreateOrUpdatePersonDto updatePersonDto)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             if (id <= 0)
             {
                 return ApiResponseHelper.BadRequest("ID must be greater than zero.");

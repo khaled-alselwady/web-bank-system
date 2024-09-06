@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using BankSystemBusiness.HelperClasses;
 using BankSystemDataAccess.Data;
 using BankSystemDataAccess.Entities;
 using BankSystemDTOs.PersonDTOs;
@@ -16,16 +15,6 @@ namespace BankSystemBusiness.Services
         {
             _context = context;
             _mapper = mapper;
-        }
-
-        private bool _IsValid(CreateOrUpdatePersonDto person)
-        {
-            return ValidationHelper.Validate(
-                entity: person,
-                valueCheck: (person) => !string.IsNullOrWhiteSpace(person.FirstName) &&
-                                        !string.IsNullOrWhiteSpace(person.LastName) &&
-                                        !string.IsNullOrWhiteSpace(person.Phone)
-                );
         }
 
         public async Task<List<PersonDetailsDto>?> All()
@@ -51,7 +40,7 @@ namespace BankSystemBusiness.Services
 
         public async Task<PersonDetailsDto?> Add(CreateOrUpdatePersonDto newPersonDto)
         {
-            if (newPersonDto == null || !_IsValid(newPersonDto))
+            if (newPersonDto == null)
             {
                 return null;
             }
@@ -71,7 +60,7 @@ namespace BankSystemBusiness.Services
 
         public async Task<PersonDetailsDto?> Update(int id, CreateOrUpdatePersonDto updatedPersonDto)
         {
-            if (id <= 0 || updatedPersonDto == null || !_IsValid(updatedPersonDto))
+            if (id <= 0 || updatedPersonDto == null)
             {
                 return null;
             }

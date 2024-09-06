@@ -8,6 +8,8 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="13.0.1" />
+    <PackageReference Include="FluentValidation" Version="11.9.2" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.8">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -16,7 +18,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BankSystemBusiness\BankSystemBusiness.csproj" />
+    <ProjectReference Include="..\BankSystem.Validators\BankSystem.Validators.csproj" />
+    <ProjectReference Include="..\BankSystemBusiness\BankSystem.Business.csproj" />
   </ItemGroup>
 
 </Project>
