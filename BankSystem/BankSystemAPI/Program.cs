@@ -1,5 +1,5 @@
+using BankSystem.Mappers.PersonMappers;
 using BankSystem.Validators.PersonValidators;
-using BankSystemBusiness.Mappers.PersonMapper;
 using BankSystemBusiness.Services;
 using BankSystemDataAccess.Data;
 using FluentValidation;
@@ -19,7 +19,10 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<AppDbContext>(options =>
         options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddAutoMapper(typeof(MappingPerson).Assembly);
+// Add AutoMapper services
+{
+    builder.Services.AddAutoMapper(typeof(PersonMapper).Assembly);
+}
 
 // Add FluentValidation services
 {
@@ -27,7 +30,11 @@ builder.Services.AddAutoMapper(typeof(MappingPerson).Assembly);
     builder.Services.AddFluentValidationClientsideAdapters();
     builder.Services.AddValidatorsFromAssemblyContaining<PersonValidator>();
 }
-builder.Services.AddScoped<PersonService>();
+
+// Add Entity Services
+{
+    builder.Services.AddScoped<PersonService>();
+}
 
 var app = builder.Build();
 

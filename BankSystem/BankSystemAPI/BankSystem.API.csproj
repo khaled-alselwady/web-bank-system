@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BankSystem.Mappers\BankSystem.Mappers.csproj" />
     <ProjectReference Include="..\BankSystem.Validators\BankSystem.Validators.csproj" />
     <ProjectReference Include="..\BankSystemBusiness\BankSystem.Business.csproj" />
   </ItemGroup>

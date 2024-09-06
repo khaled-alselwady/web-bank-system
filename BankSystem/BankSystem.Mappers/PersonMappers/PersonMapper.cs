@@ -2,11 +2,11 @@
 using BankSystemDataAccess.Entities;
 using BankSystemDTOs.PersonDTOs;
 
-namespace BankSystemBusiness.Mappers.PersonMapper
+namespace BankSystem.Mappers.PersonMappers
 {
-    public class MappingPerson : Profile
+    public class PersonMapper : Profile
     {
-        public MappingPerson()
+        public PersonMapper()
         {
             CreateMap<Person, PersonDetailsDto>();
 
