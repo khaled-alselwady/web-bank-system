@@ -12,6 +12,8 @@ public partial class User
 
     public int PersonId { get; set; }
 
+    public bool IsActive { get; set; }
+
     public virtual Person Person { get; set; } = new();
 
     public virtual ICollection<RegisterLogin> RegisterLogins { get; set; } = new List<RegisterLogin>();

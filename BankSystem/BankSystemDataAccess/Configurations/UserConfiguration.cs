@@ -18,6 +18,7 @@ namespace BankSystemDataAccess.Configurations
 
             builder.Property(e => e.Password).HasMaxLength(255);
             builder.Property(e => e.Username).HasMaxLength(100);
+            builder.Property(e => e.IsActive).HasDefaultValue(true);
 
             builder.HasOne(d => d.Person).WithOne(p => p.User)
                 .HasForeignKey<User>(d => d.PersonId)

@@ -20,6 +20,7 @@ namespace BankSystemDataAccess.Configurations
             builder.Property(e => e.AccountNumber).HasMaxLength(10);
             builder.Property(e => e.Balance).HasColumnType("decimal(18, 2)");
             builder.Property(e => e.PinCode).HasMaxLength(10);
+            builder.Property(e => e.IsActive).HasDefaultValue(true);
 
             builder.HasOne(d => d.Person).WithOne(p => p.Client)
                 .HasForeignKey<Client>(d => d.PersonId)

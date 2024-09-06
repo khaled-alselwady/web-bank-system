@@ -17,6 +17,7 @@ namespace BankSystemDataAccess.Configurations.ViewsConfigurations
             builder.Property(e => e.Email).HasMaxLength(200);
             builder.Property(e => e.FullName).HasMaxLength(200);
             builder.Property(e => e.Phone).HasMaxLength(20);
+            builder.Property(e => e.Status).HasMaxLength(10);
         }
     }
 }

@@ -12,6 +12,8 @@ public partial class Client
 
     public int PersonId { get; set; }
 
+    public bool IsActive { get; set; }
+
     public virtual Person Person { get; set; } = new();
 
     public virtual ICollection<TransfersLog> TransfersLogDestinationClients { get; set; } = [];
