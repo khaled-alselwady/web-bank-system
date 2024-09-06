@@ -1,4 +1,7 @@
-﻿namespace BankSystemDataAccess.Entities;
+﻿
+using BankSystemDataAccess.Enums;
+
+namespace BankSystemDataAccess.Entities;
 
 public partial class Person
 {
@@ -10,13 +13,12 @@ public partial class Person
 
     public string FullName => $"{FirstName} {LastName}";
 
-    /// <summary>
-    /// 0  =&gt;  Male               
-    /// 1  =&gt;  Female
-    /// </summary>
-    public byte Gender { get; set; }
+    public Gender Gender { get; set; }
 
     public string Phone { get; set; }
 
     public string? Email { get; set; }
+
+    public Client? Client { get; set; }
+    public User? User { get; set; }
 }

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace BankSystemDataAccess.Entities;
+﻿namespace BankSystemDataAccess.Entities;
 
 public partial class TransfersLog
 {
@@ -21,9 +18,9 @@ public partial class TransfersLog
 
     public int CreatedByUserId { get; set; }
 
-    public virtual User CreatedByUser { get; set; } = null!;
+    public virtual User CreatedByUser { get; set; } = new();
 
-    public virtual Client DestinationClient { get; set; } = null!;
+    public virtual Client DestinationClient { get; set; } = new();
 
-    public virtual Client SourceClient { get; set; } = null!;
+    public virtual Client SourceClient { get; set; } = new();
 }

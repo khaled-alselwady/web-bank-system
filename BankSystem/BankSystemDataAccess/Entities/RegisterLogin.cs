@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace BankSystemDataAccess.Entities;
+﻿namespace BankSystemDataAccess.Entities;
 
 public partial class RegisterLogin
 {
@@ -11,5 +8,5 @@ public partial class RegisterLogin
 
     public int UserId { get; set; }
 
-    public virtual User User { get; set; } = null!;
+    public virtual User User { get; set; } = new();
 }
