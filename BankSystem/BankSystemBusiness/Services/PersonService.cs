@@ -17,7 +17,7 @@ namespace BankSystemBusiness.Services
             _mapper = mapper;
         }
 
-        public async Task<List<PersonDetailsDto>?> All()
+        public async Task<List<PersonDetailsDto>?> AllAsync()
         {
             var people = await _context.People
                 .Select(p => _mapper.Map<PersonDetailsDto>(p))
@@ -26,7 +26,7 @@ namespace BankSystemBusiness.Services
             return people;
         }
 
-        public async Task<PersonDetailsDto?> Find(int id)
+        public async Task<PersonDetailsDto?> FindAsync(int id)
         {
             var person = await _context.People.FindAsync(id);
 
@@ -38,7 +38,7 @@ namespace BankSystemBusiness.Services
             return _mapper.Map<PersonDetailsDto?>(person);
         }
 
-        public async Task<PersonDetailsDto?> Add(CreateOrUpdatePersonDto newPersonDto)
+        public async Task<PersonDetailsDto?> AddAsync(CreateOrUpdatePersonDto newPersonDto)
         {
             if (newPersonDto == null)
             {
@@ -58,7 +58,7 @@ namespace BankSystemBusiness.Services
             return _mapper.Map<PersonDetailsDto?>(person);
         }
 
-        public async Task<PersonDetailsDto?> Update(int id, CreateOrUpdatePersonDto updatedPersonDto)
+        public async Task<PersonDetailsDto?> UpdateAsync(int id, CreateOrUpdatePersonDto updatedPersonDto)
         {
             if (id <= 0 || updatedPersonDto == null)
             {
@@ -80,7 +80,7 @@ namespace BankSystemBusiness.Services
             return _mapper.Map<PersonDetailsDto?>(person);
         }
 
-        public async Task<bool> Delete(int id)
+        public async Task<bool> DeleteAsync(int id)
         {
             if (id <= 0)
             {
@@ -92,7 +92,7 @@ namespace BankSystemBusiness.Services
             return deletedRows > 0;
         }
 
-        public async Task<bool> Exists(int id)
+        public async Task<bool> ExistsAsync(int id)
         {
             if (id <= 0)
             {

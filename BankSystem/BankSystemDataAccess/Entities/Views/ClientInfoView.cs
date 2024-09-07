@@ -15,4 +15,6 @@ public partial class ClientInfoView
     public string? Email { get; set; }
 
     public decimal Balance { get; set; }
+
+    public string Status { get; set; }
 }

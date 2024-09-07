@@ -21,7 +21,7 @@ namespace BankSystemAPI.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<List<PersonDetailsDto>>> All()
         {
-            var people = await _personService.All();
+            var people = await _personService.AllAsync();
             return ApiResponseHelper.HandleNull(people, "No people found.");
         }
 
@@ -36,7 +36,7 @@ namespace BankSystemAPI.Controllers
                 return ApiResponseHelper.BadRequest("ID must be greater than zero.");
             }
 
-            var person = await _personService.Find(id);
+            var person = await _personService.FindAsync(id);
             return ApiResponseHelper.HandleNull(person, $"Person with ID {id} not found.");
         }
 
@@ -55,7 +55,7 @@ namespace BankSystemAPI.Controllers
                 return ApiResponseHelper.BadRequest("Person data is required.");
             }
 
-            var person = await _personService.Add(newPerson);
+            var person = await _personService.AddAsync(newPerson);
             return ApiResponseHelper.HandleNull(person, "Failed to add new person.");
         }
 
@@ -74,7 +74,7 @@ namespace BankSystemAPI.Controllers
                 return ApiResponseHelper.BadRequest("ID must be greater than zero.");
             }
 
-            var person = await _personService.Update(id, updatePersonDto);
+            var person = await _personService.UpdateAsync(id, updatePersonDto);
 
             return ApiResponseHelper.HandleNull(person, "Failed to update person.");
         }
@@ -89,7 +89,7 @@ namespace BankSystemAPI.Controllers
                 return ApiResponseHelper.BadRequest("ID must be greater than zero.");
             }
 
-            var isDeleted = await _personService.Delete(id);
+            var isDeleted = await _personService.DeleteAsync(id);
 
             if (!isDeleted)
             {
@@ -109,7 +109,7 @@ namespace BankSystemAPI.Controllers
                 return ApiResponseHelper.BadRequest("ID must be greater than zero.");
             }
 
-            var isFound = await _personService.Exists(id);
+            var isFound = await _personService.ExistsAsync(id);
 
             return ApiResponseHelper.Ok(isFound);
         }
