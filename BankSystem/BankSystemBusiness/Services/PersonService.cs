@@ -3,6 +3,7 @@ using BankSystemDataAccess.Data;
 using BankSystemDataAccess.Entities;
 using BankSystemDTOs.PersonDTOs;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace BankSystemBusiness.Services
 {
@@ -10,32 +11,50 @@ namespace BankSystemBusiness.Services
     {
         private readonly AppDbContext _context;
         private readonly IMapper _mapper;
+        private readonly ILogger<PersonService> _logger;
 
-        public PersonService(AppDbContext context, IMapper mapper)
+        public PersonService(AppDbContext context, IMapper mapper, ILogger<PersonService> logger)
         {
             _context = context;
             _mapper = mapper;
+            _logger = logger;
         }
 
         public async Task<List<PersonDetailsDto>?> AllAsync()
         {
-            var people = await _context.People
-                .Select(p => _mapper.Map<PersonDetailsDto>(p))
-                .ToListAsync();
+            try
+            {
+                var people = await _context.People
+                    .Select(p => _mapper.Map<PersonDetailsDto>(p))
+                    .ToListAsync();
 
-            return people;
+                return people;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error occurred while retrieving all people");
+                throw;
+            }
         }
 
         public async Task<PersonDetailsDto?> FindAsync(int id)
         {
-            var person = await _context.People.FindAsync(id);
-
-            if (person == null)
+            try
             {
-                return null;
-            }
+                var person = await _context.People.FindAsync(id);
 
-            return _mapper.Map<PersonDetailsDto?>(person);
+                if (person == null)
+                {
+                    return null;
+                }
+
+                return _mapper.Map<PersonDetailsDto?>(person);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error occurred while finding person by Id: {Id}", id);
+                throw;
+            }
         }
 
         public async Task<PersonDetailsDto?> AddAsync(CreateOrUpdatePersonDto newPersonDto)
@@ -45,17 +64,25 @@ namespace BankSystemBusiness.Services
                 return null;
             }
 
-            var person = _mapper.Map<CreateOrUpdatePersonDto, Person>(newPersonDto);
-
-            if (person == null)
+            try
             {
-                return null;
+                var person = _mapper.Map<Person>(newPersonDto);
+
+                if (person == null)
+                {
+                    return null;
+                }
+
+                await _context.People.AddAsync(person);
+                await _context.SaveChangesAsync();
+
+                return _mapper.Map<PersonDetailsDto?>(person);
             }
-
-            await _context.People.AddAsync(person);
-            await _context.SaveChangesAsync();
-
-            return _mapper.Map<PersonDetailsDto?>(person);
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error occurred while adding person");
+                throw;
+            }
         }
 
         public async Task<PersonDetailsDto?> UpdateAsync(int id, CreateOrUpdatePersonDto updatedPersonDto)
@@ -65,19 +92,26 @@ namespace BankSystemBusiness.Services
                 return null;
             }
 
-            var person = await _context.People.FindAsync(id);
-
-            if (person == null)
+            try
             {
-                return null;
+                var person = await _context.People.FindAsync(id);
+
+                if (person == null)
+                {
+                    return null;
+                }
+
+                _mapper.Map(updatedPersonDto, person);
+                _context.Entry(person).State = EntityState.Modified;
+                await _context.SaveChangesAsync();
+
+                return _mapper.Map<PersonDetailsDto?>(person);
             }
-
-            _mapper.Map(updatedPersonDto, person);
-
-            _context.Entry(person).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
-
-            return _mapper.Map<PersonDetailsDto?>(person);
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error occurred while updating person with Id: {Id}", id);
+                throw;
+            }
         }
 
         public async Task<bool> DeleteAsync(int id)
@@ -87,9 +121,19 @@ namespace BankSystemBusiness.Services
                 return false;
             }
 
-            var deletedRows = await _context.People.Where(x => x.Id == id).ExecuteDeleteAsync();
+            try
+            {
+                var deletedRows = await _context.People
+                    .Where(x => x.Id == id)
+                    .ExecuteDeleteAsync();
 
-            return deletedRows > 0;
+                return deletedRows > 0;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error occurred while deleting person with Id: {Id}", id);
+                throw;
+            }
         }
 
         public async Task<bool> ExistsAsync(int id)
@@ -99,7 +143,15 @@ namespace BankSystemBusiness.Services
                 return false;
             }
 
-            return await _context.People.AnyAsync(p => p.Id == id);
+            try
+            {
+                return await _context.People.AnyAsync(p => p.Id == id);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error occurred while checking existence of person with Id: {Id}", id);
+                throw;
+            }
         }
     }
 }
