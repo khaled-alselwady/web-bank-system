@@ -22,7 +22,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<AppDbContext>(options =>
         options
         .UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
-        .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
+        .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking)
+        .LogTo(Console.Write, LogLevel.Information));
 
 // Configure Serilog
 {

@@ -26,7 +26,7 @@ namespace BankSystem.API.Controllers
         {
             try
             {
-                var users = await _userService.AllAsync();
+                var users = await _userService.GetAllUsersAsync();
                 if (users == null || users.Count == 0)
                 {
                     _logger.LogWarning("No users found.");
@@ -166,7 +166,7 @@ namespace BankSystem.API.Controllers
 
             try
             {
-                var user = await _userService.AddAsync(newUserDto);
+                var user = await _userService.AddUserAsync(newUserDto);
                 if (user == null)
                 {
                     _logger.LogWarning("Failed to add new user.");
@@ -194,7 +194,7 @@ namespace BankSystem.API.Controllers
 
             try
             {
-                var user = await _userService.UpdateAsync(id, updatedUserDto);
+                var user = await _userService.UpdateUserAsync(id, updatedUserDto);
                 if (user == null)
                 {
                     _logger.LogWarning("Failed to update user with ID: {Id}", id);
@@ -223,7 +223,7 @@ namespace BankSystem.API.Controllers
 
             try
             {
-                var isDeleted = await _userService.DeleteAsync(id);
+                var isDeleted = await _userService.DeleteUserAsync(id);
                 if (!isDeleted)
                 {
                     _logger.LogWarning("User with ID {Id} not found or could not be deleted.", id);

@@ -27,7 +27,7 @@ namespace BankSystem.API.Controllers
         {
             try
             {
-                var clients = await _clientService.AllAsync();
+                var clients = await _clientService.GetAllClientsAsync();
                 if (clients == null || clients.Count == 0)
                 {
                     _logger.LogWarning("No clients found.");
@@ -122,7 +122,7 @@ namespace BankSystem.API.Controllers
 
             try
             {
-                var client = await _clientService.AddAsync(newClientDto);
+                var client = await _clientService.AddClientAsync(newClientDto);
                 return ApiResponseHelper.HandleNull(client, "Failed to add new client.");
             }
             catch (Exception ex)
@@ -158,7 +158,7 @@ namespace BankSystem.API.Controllers
 
             try
             {
-                var client = await _clientService.UpdateAsync(id, updatedClientDto);
+                var client = await _clientService.UpdateClientAsync(id, updatedClientDto);
                 return ApiResponseHelper.HandleNull(client, "Failed to update client.");
             }
             catch (Exception ex)
@@ -183,7 +183,7 @@ namespace BankSystem.API.Controllers
 
             try
             {
-                var isDeleted = await _clientService.DeleteAsync(id);
+                var isDeleted = await _clientService.DeleteClientAsync(id);
                 if (!isDeleted)
                 {
                     _logger.LogWarning("Client with ID {Id} not found for deletion.", id);

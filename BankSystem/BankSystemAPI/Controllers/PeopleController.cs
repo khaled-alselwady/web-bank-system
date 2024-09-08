@@ -26,7 +26,7 @@ namespace BankSystemAPI.Controllers
         {
             try
             {
-                var people = await _personService.AllAsync();
+                var people = await _personService.GetAllPeopleAsync();
                 if (people == null || !people.Any())
                 {
                     _logger.LogWarning("No people found.");
@@ -56,7 +56,7 @@ namespace BankSystemAPI.Controllers
 
             try
             {
-                var person = await _personService.FindAsync(id);
+                var person = await _personService.FindByIdAsync(id);
                 if (person == null)
                 {
                     _logger.LogWarning("Person with ID {Id} not found.", id);
@@ -91,7 +91,7 @@ namespace BankSystemAPI.Controllers
 
             try
             {
-                var person = await _personService.AddAsync(newPerson);
+                var person = await _personService.AddPersonAsync(newPerson);
                 if (person == null)
                 {
                     _logger.LogWarning("Failed to add new person.");
@@ -126,7 +126,7 @@ namespace BankSystemAPI.Controllers
 
             try
             {
-                var person = await _personService.UpdateAsync(id, updatePersonDto);
+                var person = await _personService.UpdatePersonAsync(id, updatePersonDto);
                 if (person == null)
                 {
                     _logger.LogWarning("Failed to update person with ID {Id}.", id);
@@ -155,7 +155,7 @@ namespace BankSystemAPI.Controllers
 
             try
             {
-                var isDeleted = await _personService.DeleteAsync(id);
+                var isDeleted = await _personService.DeletePersonAsync(id);
                 if (!isDeleted)
                 {
                     _logger.LogWarning("Person with ID {Id} could not be deleted or was not found.", id);
@@ -185,7 +185,7 @@ namespace BankSystemAPI.Controllers
 
             try
             {
-                var isFound = await _personService.ExistsAsync(id);
+                var isFound = await _personService.ExistsByIdAsync(id);
                 return Ok(isFound);
             }
             catch (Exception ex)
