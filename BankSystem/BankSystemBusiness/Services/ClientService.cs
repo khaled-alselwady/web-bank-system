@@ -58,7 +58,6 @@ namespace BankSystem.Business.Services
                 return null;
             }
 
-            // Map the Client entity from DTO and set the PersonId
             var client = _mapper.Map<Client>(newClientDto);
             if (client == null)
             {
@@ -78,7 +77,6 @@ namespace BankSystem.Business.Services
                 return null;
             }
 
-            // Load the client along with the related person in a single database call
             var client = await _context.Clients
                 .AsTracking()
                 .Include(c => c.Person)

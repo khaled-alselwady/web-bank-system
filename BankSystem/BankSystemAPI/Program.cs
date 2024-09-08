@@ -32,14 +32,17 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 {
     builder.Services.AddFluentValidationAutoValidation();
     builder.Services.AddFluentValidationClientsideAdapters();
+
     builder.Services.AddValidatorsFromAssemblyContaining<PersonValidator>();
     builder.Services.AddValidatorsFromAssemblyContaining<ClientValidator>();
+    builder.Services.AddValidatorsFromAssemblyContaining<UserService>();
 }
 
 // Add Entity Services
 {
     builder.Services.AddScoped<PersonService>();
     builder.Services.AddScoped<ClientService>();
+    builder.Services.AddScoped<UserService>();
 }
 
 var app = builder.Build();

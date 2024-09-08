@@ -25,7 +25,7 @@ namespace BankSystem.Validators.ClientValidators
                 .WithMessage("IsActive must be a boolean value.");
 
             // Use the existing PersonValidator to validate the Person property
-            RuleFor(client => client.PersonDto)
+            RuleFor(client => client.Person)
                 .SetValidator(new PersonValidator());
         }
     }

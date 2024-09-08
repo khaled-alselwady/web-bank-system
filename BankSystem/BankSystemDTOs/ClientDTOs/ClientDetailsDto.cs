@@ -8,6 +8,6 @@ namespace BankSystem.DTOs.ClientDTOs
         string PinCode,
         decimal Balance,
         bool IsActive,
-        PersonDetailsDto person
+        PersonDetailsDto Person
         );
 }
