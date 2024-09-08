@@ -7,15 +7,17 @@ namespace BankSystem.Business.Services
 {
     public class BaseService<TEntity, TDto> where TEntity : class
     {
-        private readonly DbContext _context;
-        private readonly IMapper _mapper;
-        private readonly ILogger<BaseService<TEntity, TDto>> _logger;
+        protected readonly DbContext _context;
+        protected readonly IMapper _mapper;
+        protected readonly ILogger<BaseService<TEntity, TDto>> _logger;
+        private readonly DbSet<TEntity> _dbSet;
 
-        public BaseService(DbContext context, IMapper mapper, ILogger<BaseService<TEntity, TDto>> logger)
+        protected BaseService(DbContext context, IMapper mapper, ILogger<BaseService<TEntity, TDto>> logger)
         {
             _context = context;
             _mapper = mapper;
             _logger = logger;
+            _dbSet = _context.Set<TEntity>();
         }
 
         protected virtual IQueryable<TEntity> IncludeDependencies(IQueryable<TEntity> query)
@@ -28,7 +30,7 @@ namespace BankSystem.Business.Services
         {
             try
             {
-                var query = IncludeDependencies(_context.Set<TEntity>());
+                var query = IncludeDependencies(_dbSet);
                 var entity = await query.FirstOrDefaultAsync(predicate);
 
                 return entity == null ? default : _mapper.Map<TDto>(entity);
@@ -44,7 +46,7 @@ namespace BankSystem.Business.Services
         {
             try
             {
-                return await _context.Set<TEntity>().AnyAsync(predicate);
+                return await _dbSet.AnyAsync(predicate);
             }
             catch (Exception ex)
             {
@@ -70,7 +72,7 @@ namespace BankSystem.Business.Services
         {
             try
             {
-                return await _context.Set<TEntity>()
+                return await _dbSet
                     .Select(e => _mapper.Map<TDetailsDto>(e))
                     .ToListAsync();
             }
@@ -86,7 +88,7 @@ namespace BankSystem.Business.Services
             try
             {
                 var entity = _mapper.Map<TEntity>(createDto);
-                await _context.Set<TEntity>().AddAsync(entity);
+                await _dbSet.AddAsync(entity);
                 await _context.SaveChangesAsync();
 
                 return _mapper.Map<TDto>(entity);
@@ -107,7 +109,7 @@ namespace BankSystem.Business.Services
                     return default;
                 }
 
-                var entity = await findEntityFunc(IncludeDependencies(_context.Set<TEntity>().AsTracking()));
+                var entity = await findEntityFunc(IncludeDependencies(_dbSet.AsTracking()));
 
                 if (entity == null)
                 {
@@ -135,7 +137,7 @@ namespace BankSystem.Business.Services
                     return false;
                 }
 
-                var rowsDeleted = await _context.Set<TEntity>().Where(predicate).ExecuteDeleteAsync();
+                var rowsDeleted = await _dbSet.Where(predicate).ExecuteDeleteAsync();
 
                 return rowsDeleted > 0;
             }
@@ -150,7 +152,7 @@ namespace BankSystem.Business.Services
         {
             try
             {
-                await _context.Set<TEntity>()
+                await _dbSet
                 .Where(predicate)
                 .ExecuteUpdateAsync(set => set
                     .SetProperty(e => EF.Property<bool>(e, "IsActive"), false));

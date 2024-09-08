@@ -14,7 +14,7 @@ namespace BankSystemAPI.HelperClasses
             => new OkObjectResult(data);
 
         public static ActionResult HandleNull<T>(T data, string? errorMessage = null)
-            => data == null ? BadRequest(errorMessage) : Ok(data);
+            => data == null ? NotFound(errorMessage) : Ok(data);
 
         public static ActionResult OperationFailed(string? message = null)
             => BadRequest(message ?? ApiMessages.OperationFailed);
