@@ -4,6 +4,7 @@
   </header>
 
   <main>
-    <app-main-startup></app-main-startup>
+    <app-main-startup *ngIf="!isLoginSuccess"></app-main-startup>
+    <router-outlet></router-outlet>
   </main>
 </div>

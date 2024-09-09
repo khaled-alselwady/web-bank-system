@@ -4,7 +4,17 @@
     <p>Bank Management System</p>
   </div>
   <div class="right-side">
-    <ul>
+    <img
+      *ngIf="isLoginSuccess"
+      [src]="
+        isUserMale
+          ? '../../assets/icons/male-user-header.png'
+          : '../../assets/icons/female-user-header.png'
+      "
+      alt="Profile"
+    />
+
+    <ul *ngIf="!isLoginSuccess">
       <li>
         <a (click)="onLogin()">Login</a>
       </li>

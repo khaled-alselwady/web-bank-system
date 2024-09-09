@@ -7,6 +7,7 @@ import { catchError } from 'rxjs/operators';
 @Injectable({ providedIn: 'root' })
 export class UsersService {
   private baseUrl = 'http://localhost:5006/api/users/';
+  currentUser: User | undefined = undefined;
   constructor(private http: HttpClient) {}
 
   findUserByUsernameAndPassword(username: string, password: string) {

@@ -50,6 +50,7 @@ export class AuthComponent implements OnDestroy {
               this.errorMessage = 'User is not active.';
               return;
             }
+            this.usersService.currentUser = user;
             this.loginScreenService.setShowLoginScreen(false);
             formData.reset();
           } else {
