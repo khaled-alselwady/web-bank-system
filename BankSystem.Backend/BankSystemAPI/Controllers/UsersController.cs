@@ -131,5 +131,11 @@ namespace BankSystem.API.Controllers
             !string.IsNullOrWhiteSpace(username) && !string.IsNullOrWhiteSpace(password)
                 ? HandleRequestAsync(() => _userService.ExistsByUsernameAndPasswordAsync(username, password), $"Error occurred while checking existence of user with username: {username} and password.")
                 : Task.FromResult<ActionResult<bool>>(HandleBadRequest("Username and password are required."));
+
+        [HttpGet("isActive/{id:int}", Name = "IsUserActive")]
+        public Task<ActionResult<bool>> IsUserActive([FromRoute] int id) =>
+        id > 0
+             ? HandleRequestAsync(() => _userService.IsUserActive(id), $"Error occurred while checking the activity of the user with ID: {id}.")
+             : Task.FromResult<ActionResult<bool>>(HandleBadRequest("ID must be greater than zero."));
     }
 }

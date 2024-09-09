@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { LoginScreenService } from './auth/login-screen.service';
+import { LoginScreenService } from './services/login-screen.service';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -17,7 +18,7 @@ import { ErrorMessageComponent } from './shared/error-message/error-message.comp
     AuthComponent,
     ErrorMessageComponent,
   ],
-  imports: [BrowserModule, FormsModule],
+  imports: [BrowserModule, FormsModule, HttpClientModule],
   providers: [LoginScreenService],
   bootstrap: [AppComponent],
 })

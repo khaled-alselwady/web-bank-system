@@ -55,5 +55,9 @@ namespace BankSystem.Business.Services
 
         public async Task<bool> ExistsByUsernameAndPasswordAsync(string username, string password)
             => await ExistsAsync(u => u.Username == username && u.Password == password);
+
+        public async Task<bool> IsUserActive(int id)
+            => await ExistsAsync(u => u.Id == id && u.IsActive);
+
     }
 }

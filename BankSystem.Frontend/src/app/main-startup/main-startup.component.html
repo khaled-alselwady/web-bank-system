@@ -1,8 +1,4 @@
-<app-auth
-  *ngIf="showLoginScreen"
-  (close)="onLoginScreenClose()"
-  (login)="onLogin($event)"
-></app-auth>
+<app-auth *ngIf="showLoginScreen" (close)="onLoginScreenClose()"></app-auth>
 
 <main>
   <div class="image-container">
