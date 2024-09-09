@@ -9,6 +9,7 @@ import { HeaderComponent } from './header/header.component';
 import { MainStartupComponent } from './main-startup/main-startup.component';
 import { AuthComponent } from './auth/auth.component';
 import { ErrorMessageComponent } from './shared/error-message/error-message.component';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,7 @@ import { ErrorMessageComponent } from './shared/error-message/error-message.comp
     AuthComponent,
     ErrorMessageComponent,
   ],
-  imports: [BrowserModule, FormsModule, HttpClientModule],
+  imports: [BrowserModule, FormsModule, HttpClientModule, AppRoutingModule],
   providers: [LoginScreenService],
   bootstrap: [AppComponent],
 })
