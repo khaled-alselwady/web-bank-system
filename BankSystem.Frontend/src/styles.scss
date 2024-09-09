@@ -1,0 +1,44 @@
+/* You can add global styles to this file, and also import other style files */
+@import "./app/styles/mixins";
+@import "./app/styles/variables";
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  font-family: $font-stack;
+  color: $primary-color;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+  height: 100rem;
+  min-width: 900px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  font-weight: normal;
+}
+
+p {
+  padding: 0;
+  line-height: 1.6;
+  margin-bottom: $spacing-unit;
+}
+
+@media (max-width: 900px) {
+  body {
+    width: 900px;
+    overflow-x: hidden;
+  }
+}

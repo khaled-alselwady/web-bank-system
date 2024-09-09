@@ -482,3 +482,47 @@ $RECYCLE.BIN/
 
 # Vim temporary swap files
 *.swp
+
+# Angular build output directories
+dist/
+build/
+
+# Angular generated files
+.angular/
+
+# Environment and build files (optional, typically you do not ignore these unless they are sensitive or build-specific)
+# angular.json
+# tsconfig.json
+
+# Generated CSS files and source maps from SCSS
+*.css.map
+
+# Node
+node_modules
+npm-debug.log
+yarn-error.log
+
+# Visual Studio Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/*
+
+# Ignore workspace files as they are user-specific
+*.code-workspace
+
+# Logs and temporary files
+*.log
+*.tmp
+*.temp
+
+# Miscellaneous
+/.angular/cache
+.sass-cache/
+/connect.lock
+/coverage
+/libpeerconnection.log
+testem.log
+/typings
