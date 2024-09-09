@@ -3,10 +3,11 @@
 header {
   @include flex-center;
   justify-content: space-between;
-  background-color: #7f30a2;
+  background-color: #0f354b;
   width: 100%;
   height: 5rem;
   position: fixed;
+  top: 0;
   padding: 2rem;
 }
 
@@ -41,7 +42,7 @@ ul {
       color: white;
       text-decoration: none;
       &:hover {
-        color: #dddce2;
+        color: #a0a7ce;
         cursor: pointer;
         transition: all 0.12s;
       }
