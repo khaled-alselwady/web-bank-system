@@ -1,3 +1,9 @@
+<app-auth
+  *ngIf="showLoginScreen"
+  (close)="onLoginScreenClose()"
+  (login)="onLogin($event)"
+></app-auth>
+
 <main>
   <div class="image-container">
     <img src="../../assets/imgs/bank-main2.jpg" alt="bank-main" />

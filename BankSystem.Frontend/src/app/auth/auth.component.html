@@ -1,0 +1,32 @@
+<div class="backdrop" (click)="onClose()"></div>
+
+<dialog open>
+  <h2>Login</h2>
+  <app-error-message
+    [errorMessage]="errorMessage"
+    *ngIf="errorMessage"
+  ></app-error-message>
+  <form #formData="ngForm" (ngSubmit)="onSubmit(formData)">
+    <p>
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" ngModel email required />
+    </p>
+
+    <p>
+      <label for="password">Password</label>
+      <input
+        type="password"
+        id="password"
+        name="password"
+        ngModel
+        required
+        minlength="6"
+      />
+    </p>
+
+    <p class="actions">
+      <button type="button" (click)="onClose()">Close</button>
+      <button type="submit">Login</button>
+    </p>
+  </form>
+</dialog>

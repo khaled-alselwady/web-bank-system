@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { LoginScreenService } from '../auth/login-screen.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
+  constructor(private loginScreenService: LoginScreenService) {}
 
-  constructor() { }
-
-  ngOnInit(): void {
+  onLogin() {
+    this.loginScreenService.setShowLoginScreen(true);
   }
-
 }
