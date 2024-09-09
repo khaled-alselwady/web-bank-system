@@ -35,7 +35,7 @@ export class UsersService {
   private handleError(error: HttpErrorResponse) {
     let errorMessage = 'Unknown error!';
 
-    if (!error || !error.error) {
+    if (!error || !error.error || !error.error.message) {
       return throwError(errorMessage);
     }
 
