@@ -19,6 +19,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { DashboardItemComponent } from './components/dashboard/dashboard-item/dashboard-item.component';
 import { ClientsComponent } from './components/clients/clients.component';
 import { HeaderItemComponent } from './components/shared/header-item/header-item.component';
+import { FilterComponent } from './components/shared/filter/filter.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { HeaderItemComponent } from './components/shared/header-item/header-item
     DashboardItemComponent,
     ClientsComponent,
     HeaderItemComponent,
+    FilterComponent,
   ],
   imports: [BrowserModule, FormsModule, HttpClientModule, AppRoutingModule],
   providers: [LoginScreenService, UsersService, ClientsService],
