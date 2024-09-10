@@ -1,11 +1,17 @@
 @use "../../styles/mixins" as *;
 @use "../../styles/variables" as *;
 
+:host {
+  height: 100vh;
+  background-color: #f4f4f4;
+}
+
 ul {
   @include list-stylings;
   flex-direction: column;
   margin-top: 5rem;
-  padding: 1.5rem 0rem 1rem 4rem;
+
+  padding: 1.5rem 4rem 1rem 4rem;
   li {
     margin-bottom: 2.2rem;
     @include flex-center;

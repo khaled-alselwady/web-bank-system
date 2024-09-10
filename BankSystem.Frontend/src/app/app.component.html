@@ -1,6 +1,6 @@
 <app-header></app-header>
 
 <main>
-  <app-main-sidebar class="sidebar"></app-main-sidebar>
-  <router-outlet class="main-content"></router-outlet>
+  <app-main-sidebar *ngIf="isLoginSuccess" class="sidebar"></app-main-sidebar>
+  <router-outlet></router-outlet>
 </main>

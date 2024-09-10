@@ -1,0 +1,46 @@
+@use "../../styles/mixins" as *;
+
+:host {
+  flex: 1;
+  margin-right: 1rem;
+}
+
+section {
+  color: black;
+  margin-top: 6rem;
+  margin-left: 1rem;
+  padding: 1rem;
+  background-color: #f4f4f4;
+  border-radius: 4px;
+  .title {
+    @include flex-center;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.6rem;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    color: black;
+    margin-bottom: 1.5rem;
+  }
+  .dashboard-items-container {
+    @include flex-center;
+    justify-content: space-around;
+    gap: 1rem;
+    padding: 1rem;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    @media (min-width: 768px) {
+      flex-direction: column;
+    }
+    @media (min-width: 1200px) {
+      flex-direction: row;
+    }
+    h2 {
+      margin-bottom: 1rem;
+    }
+  }
+}
