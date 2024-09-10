@@ -14,6 +14,7 @@ import { AuthComponent } from './components/auth/auth.component';
 import { ErrorMessageComponent } from './components/shared/error-message/error-message.component';
 import { MainStartupComponent } from './components/main-startup/main-startup.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { DashboardItemComponent } from './components/dashboard/dashboard-item/dashboard-item.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     MainItemsSidebarComponent,
     ItemSidebarComponent,
     DashboardComponent,
+    DashboardItemComponent,
   ],
   imports: [BrowserModule, FormsModule, HttpClientModule, AppRoutingModule],
   providers: [LoginScreenService, UsersService],
