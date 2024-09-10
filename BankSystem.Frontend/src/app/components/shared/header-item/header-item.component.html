@@ -1,1 +1,17 @@
-<p>header-item works!</p>
+<div class="container-header-item">
+  <div
+    class="title"
+    [ngClass]="{
+      'center-title-with-button': buttonName,
+      'center-title-without-button': !buttonName
+    }"
+  >
+    {{ titleName }}
+  </div>
+  <div class="action">
+    <button *ngIf="buttonName">
+      <img src="../../../../assets/icons/add-white.png" alt="" />
+      <div>{{ buttonName }}</div>
+    </button>
+  </div>
+</div>

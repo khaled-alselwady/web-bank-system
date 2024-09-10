@@ -1,0 +1,47 @@
+@use "../../../styles/mixins" as *;
+@use "../../../styles/variables" as *;
+
+.container-header-item {
+  @include flex-center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 1rem;
+  font-size: 1.6rem;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  color: black;
+  margin-bottom: 1.5rem;
+
+  .center-title-with-button {
+    flex: 1;
+    text-align: center;
+    position: relative;
+    left: 2.3rem;
+  }
+
+  .center-title-without-button {
+    flex: 1;
+    text-align: center;
+  }
+
+  button {
+    @include flex-center;
+    font-size: 1.2rem;
+    color: $primary-color;
+    border: none;
+    background-color: #1e3a5a;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+    img {
+      @include icon-styling;
+    }
+    &:hover {
+      background-color: lighten(#1e3a5a, 10%);
+      color: darken(white, 10%);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+  }
+}

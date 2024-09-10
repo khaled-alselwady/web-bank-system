@@ -14,9 +14,7 @@ header {
 }
 
 img {
-  height: 2rem;
-  margin-right: 0.3rem;
-  cursor: pointer;
+  @include icon-styling;
 }
 
 p {

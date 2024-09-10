@@ -16,3 +16,9 @@
   height: 100vh;
   background-color: rgba($color, $opacity);
 }
+
+@mixin icon-styling {
+  height: 2rem;
+  margin-right: 0.3rem;
+  cursor: pointer;
+}
