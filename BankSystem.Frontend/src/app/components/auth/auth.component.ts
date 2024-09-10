@@ -1,7 +1,7 @@
 import { Component, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { LoginScreenService } from '../services/login-screen.service';
-import { UsersService } from '../services/users.service';
+import { LoginScreenService } from '../../services/login-screen.service';
+import { UsersService } from '../../services/users.service';
 import { Subscription } from 'rxjs/internal/Subscription';
 
 @Component({

@@ -5,13 +5,14 @@ import { LoginScreenService } from './services/login-screen.service';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
-import { MainStartupComponent } from './main-startup/main-startup.component';
-import { AuthComponent } from './auth/auth.component';
-import { ErrorMessageComponent } from './shared/error-message/error-message.component';
 import { AppRoutingModule } from './app-routing.module';
-import { MainItemsSidebarComponent } from './main-items-sidebar/main-items-sidebar.component';
-import { ItemSidebarComponent } from './item-sidebar/item-sidebar.component';
+import { ItemSidebarComponent } from './components/item-sidebar/item-sidebar.component';
+import { UsersService } from './services/users.service';
+import { HeaderComponent } from './components/header/header.component';
+import { MainItemsSidebarComponent } from './components/main-items-sidebar/main-items-sidebar.component';
+import { AuthComponent } from './components/auth/auth.component';
+import { ErrorMessageComponent } from './components/shared/error-message/error-message.component';
+import { MainStartupComponent } from './components/main-startup/main-startup.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,7 @@ import { ItemSidebarComponent } from './item-sidebar/item-sidebar.component';
     ItemSidebarComponent,
   ],
   imports: [BrowserModule, FormsModule, HttpClientModule, AppRoutingModule],
-  providers: [LoginScreenService],
+  providers: [LoginScreenService, UsersService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

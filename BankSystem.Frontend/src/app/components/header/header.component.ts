@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { LoginScreenService } from '../services/login-screen.service';
-import { UsersService } from '../services/users.service';
+import { LoginScreenService } from '../../services/login-screen.service';
+import { UsersService } from '../../services/users.service';
 
 @Component({
   selector: 'app-header',

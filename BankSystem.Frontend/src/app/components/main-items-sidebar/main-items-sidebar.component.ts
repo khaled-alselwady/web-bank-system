@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Item } from '../item-sidebar/item-model';
+import type { Item } from '../../components/item-sidebar/item-model';
 
 @Component({
   selector: 'app-main-sidebar',
