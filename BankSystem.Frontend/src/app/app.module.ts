@@ -20,6 +20,7 @@ import { DashboardItemComponent } from './components/dashboard/dashboard-item/da
 import { ClientsComponent } from './components/clients/clients.component';
 import { HeaderItemComponent } from './components/shared/header-item/header-item.component';
 import { FilterComponent } from './components/shared/filter/filter.component';
+import { DataGridComponent } from './components/shared/data-grid/data-grid.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { FilterComponent } from './components/shared/filter/filter.component';
     ClientsComponent,
     HeaderItemComponent,
     FilterComponent,
+    DataGridComponent,
   ],
   imports: [BrowserModule, FormsModule, HttpClientModule, AppRoutingModule],
   providers: [LoginScreenService, UsersService, ClientsService],
