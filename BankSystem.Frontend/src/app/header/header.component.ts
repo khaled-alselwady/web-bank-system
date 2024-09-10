@@ -8,6 +8,7 @@ import { UsersService } from '../services/users.service';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
+  isDropdownOpen = false;
   constructor(
     private loginScreenService: LoginScreenService,
     private usersService: UsersService
@@ -25,5 +26,9 @@ export class HeaderComponent {
 
   onLogin() {
     this.loginScreenService.setShowLoginScreen(true);
+  }
+
+  toggleDropdown() {
+    this.isDropdownOpen = !this.isDropdownOpen;
   }
 }
