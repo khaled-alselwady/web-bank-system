@@ -1,1 +1,19 @@
-<p>filter works!</p>
+<form>
+  <p class="search">
+    <input
+      type="text"
+      placeholder="Filter"
+      name="filter"
+      [(ngModel)]="enteredText"
+    />
+  </p>
+
+  <p>
+    <select name="" id="">
+      <!-- <option value="all">All</option> -->
+      <option *ngFor="let category of categories">
+        {{ category }}
+      </option>
+    </select>
+  </p>
+</form>

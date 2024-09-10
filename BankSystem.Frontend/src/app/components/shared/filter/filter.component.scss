@@ -1,0 +1,53 @@
+@use "../../../styles/mixins" as *;
+
+form {
+  @include flex-center;
+  width: 99.2%;
+  padding: 1rem;
+  font-size: 1.6rem;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  color: black;
+  margin: 1.5rem 1rem;
+
+  p {
+    margin: 0;
+  }
+
+  .search {
+    flex: 1;
+  }
+
+  input {
+    width: 85%;
+    padding: 0.6rem;
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+    border: none;
+    border-bottom: 2px solid #667484;
+    outline: none;
+    background-color: transparent;
+    transition: border-color 0.2s;
+
+    &:focus {
+      border-color: #359ad4;
+    }
+  }
+
+  select {
+    padding: 0.6rem;
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+    border: none;
+    border-bottom: 2px solid #667484;
+    outline: none;
+    background-color: transparent;
+    transition: border-color 0.2s;
+    cursor: pointer;
+
+    &:focus {
+      border-color: #359ad4;
+    }
+  }
+}
