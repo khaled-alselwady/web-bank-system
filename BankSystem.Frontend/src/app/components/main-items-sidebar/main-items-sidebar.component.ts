@@ -6,7 +6,7 @@ import type { Item } from '../../components/item-sidebar/item-model';
   templateUrl: './main-items-sidebar.component.html',
   styleUrls: ['./main-items-sidebar.component.scss'],
 })
-export class MainItemsSidebarComponent implements OnInit {
+export class MainItemsSidebarComponent {
   items: Item[] = [
     {
       image: {
@@ -48,7 +48,26 @@ export class MainItemsSidebarComponent implements OnInit {
       title: 'Users',
     },
   ];
-  constructor() {}
+  selectedIndex: number | null = 0;
 
-  ngOnInit(): void {}
+  onSelectItem(index: number) {
+    this.selectedIndex = index;
+  }
+
+  private getImageSrc(item: Item, index: number) {
+    if (this.selectedIndex === index) {
+      return item.image.src.replace('-gray', '-white');
+    }
+    return item.image.src;
+  }
+
+  getUpdatedItem(item: Item, index: number) {
+    return {
+      ...item,
+      image: {
+        ...item.image,
+        src: this.getImageSrc(item, index),
+      },
+    };
+  }
 }

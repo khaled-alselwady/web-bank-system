@@ -1,5 +1,13 @@
 <ul>
-  <li *ngFor="let item of items">
-    <app-item-sidebar [item]="item"></app-item-sidebar>
+  <li
+    *ngFor="let item of items; let i = index"
+    [routerLink]="['/', item.title.toLowerCase()]"
+    routerLinkActive="selected"
+    (click)="onSelectItem(i)"
+  >
+    <app-item-sidebar
+      [item]="getUpdatedItem(item, i)"
+      routerLinkActive="selected"
+    ></app-item-sidebar>
   </li>
 </ul>

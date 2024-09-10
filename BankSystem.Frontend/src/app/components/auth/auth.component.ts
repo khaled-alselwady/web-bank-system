@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { LoginScreenService } from '../../services/login-screen.service';
 import { UsersService } from '../../services/users.service';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-auth',
@@ -11,11 +12,12 @@ import { Subscription } from 'rxjs/internal/Subscription';
 })
 export class AuthComponent implements OnDestroy {
   errorMessage: string = '';
-  private userServiceSubscription: Subscription[] = [];
+  private userServiceSubscriptions: Subscription[] = [];
 
   constructor(
     private loginScreenService: LoginScreenService,
-    private usersService: UsersService
+    private usersService: UsersService,
+    private router: Router
   ) {}
 
   private checkUserInput(formData: NgForm) {
@@ -53,6 +55,7 @@ export class AuthComponent implements OnDestroy {
             this.usersService.currentUser = user;
             this.loginScreenService.setShowLoginScreen(false);
             formData.reset();
+            this.router.navigate(['/dashboard']);
           } else {
             this.errorMessage = 'Invalid email or password.';
           }
@@ -72,7 +75,7 @@ export class AuthComponent implements OnDestroy {
       .subscribe({
         next: (exists) => {
           if (exists) {
-            this.userServiceSubscription?.push(this.getUserInfo(formData));
+            this.userServiceSubscriptions?.push(this.getUserInfo(formData));
           } else {
             this.errorMessage = 'Invalid email or password.';
           }
@@ -94,7 +97,7 @@ export class AuthComponent implements OnDestroy {
     }
     this.resetErrorMessage();
 
-    this.userServiceSubscription.push(this.checkExistsUser(formData));
+    this.userServiceSubscriptions.push(this.checkExistsUser(formData));
   }
 
   onClose() {
@@ -102,16 +105,12 @@ export class AuthComponent implements OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (
-      !this.userServiceSubscription ||
-      this.userServiceSubscription.length <= 0
-    ) {
+    if (!this.userServiceSubscriptions) {
       return;
     }
-    this.userServiceSubscription[0].unsubscribe();
 
-    if (this.userServiceSubscription.length > 1) {
-      this.userServiceSubscription[1].unsubscribe();
-    }
+    this.userServiceSubscriptions.forEach((subscription) => {
+      subscription.unsubscribe();
+    });
   }
 }

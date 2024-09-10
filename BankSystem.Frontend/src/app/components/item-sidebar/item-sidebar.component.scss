@@ -1,4 +1,5 @@
 @use "../../styles/mixins" as *;
+@use "../../styles/variables" as *;
 
 :host {
   @include flex-center;
@@ -21,4 +22,8 @@ a {
     color: #a0a7ce;
     transition: all 0.12s;
   }
+}
+
+:host-context(.selected) a {
+  color: white;
 }

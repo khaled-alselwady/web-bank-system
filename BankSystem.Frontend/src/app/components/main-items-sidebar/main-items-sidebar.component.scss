@@ -10,13 +10,19 @@ ul {
   @include list-stylings;
   flex-direction: column;
   margin-top: 5rem;
-
-  padding: 1.5rem 4rem 1rem 4rem;
+  padding: 1.5rem 2rem 1rem 2rem;
   li {
     margin-bottom: 2.2rem;
     @include flex-center;
     align-items: center;
-    padding: 0.5rem 0;
+    padding: 0.5rem 5rem 0.5rem 1rem;
+    border-radius: 6px;
     cursor: pointer;
+    &.selected {
+      background-color: #1e3a5a;
+      a {
+        color: white !important;
+      }
+    }
   }
 }
