@@ -1,0 +1,16 @@
+@use "../styles/mixins" as *;
+@use "../styles/variables" as *;
+
+ul {
+  @include list-stylings;
+  flex-direction: column;
+  margin-top: 5rem;
+  padding: 1.5rem 0rem 1rem 4rem;
+  li {
+    margin-bottom: 2.2rem;
+    @include flex-center;
+    align-items: center;
+    padding: 0.5rem 0;
+    cursor: pointer;
+  }
+}

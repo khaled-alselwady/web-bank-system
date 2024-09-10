@@ -1,10 +1,6 @@
-<div>
-  <header>
-    <app-header></app-header>
-  </header>
+<app-header></app-header>
 
-  <main>
-    <app-main-startup *ngIf="!isLoginSuccess"></app-main-startup>
-    <router-outlet></router-outlet>
-  </main>
-</div>
+<main>
+  <app-main-sidebar class="sidebar"></app-main-sidebar>
+  <router-outlet class="main-content"></router-outlet>
+</main>

@@ -1,4 +1,4 @@
-@import "../styles/mixins";
+@use "../styles/mixins" as *;
 
 header {
   @include flex-center;
@@ -34,8 +34,7 @@ div {
 }
 
 ul {
-  display: flex;
-  list-style-type: none;
+  @include list-stylings;
 }
 
 ul {
