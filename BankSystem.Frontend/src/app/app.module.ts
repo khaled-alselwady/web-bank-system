@@ -1,13 +1,15 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { LoginScreenService } from './services/login-screen.service';
 import { HttpClientModule } from '@angular/common/http';
+import { AppRoutingModule } from './app-routing.module';
+
+import { LoginScreenService } from './services/login-screen.service';
+import { UsersService } from './services/users.service';
+import { ClientsService } from './services/clients.service';
 
 import { AppComponent } from './app.component';
-import { AppRoutingModule } from './app-routing.module';
 import { ItemSidebarComponent } from './components/item-sidebar/item-sidebar.component';
-import { UsersService } from './services/users.service';
 import { HeaderComponent } from './components/header/header.component';
 import { MainItemsSidebarComponent } from './components/main-items-sidebar/main-items-sidebar.component';
 import { AuthComponent } from './components/auth/auth.component';
@@ -31,7 +33,7 @@ import { ClientsComponent } from './components/clients/clients.component';
     ClientsComponent,
   ],
   imports: [BrowserModule, FormsModule, HttpClientModule, AppRoutingModule],
-  providers: [LoginScreenService, UsersService],
+  providers: [LoginScreenService, UsersService, ClientsService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
