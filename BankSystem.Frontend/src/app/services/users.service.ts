@@ -32,6 +32,10 @@ export class UsersService {
       .pipe(catchError(this.handleError));
   }
 
+  signOut() {
+    this.currentUser = undefined;
+  }
+
   // Error handling
   private handleError(error: HttpErrorResponse) {
     let errorMessage = 'Unknown error!';

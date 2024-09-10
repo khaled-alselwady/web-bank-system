@@ -28,6 +28,11 @@ export class HeaderComponent {
     this.loginScreenService.setShowLoginScreen(true);
   }
 
+  onSignOut() {
+    this.usersService.signOut();
+    this.isDropdownOpen = false;
+  }
+
   toggleDropdown() {
     this.isDropdownOpen = !this.isDropdownOpen;
   }

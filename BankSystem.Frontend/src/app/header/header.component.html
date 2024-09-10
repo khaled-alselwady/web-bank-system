@@ -4,25 +4,12 @@
     <p>Bank Management System</p>
   </div>
   <div class="right-side">
-    <!-- <img
-      *ngIf="isLoginSuccess"
-      appDropdownProfile
-      [src]="
-        isUserMale
-          ? '../../assets/icons/male-user-header.png'
-          : '../../assets/icons/female-user-header.png'
-      "
-      alt="Profile"
-      (click)="onProfileDropdownToggle()"
-    /> -->
-
     <div
       class="dropdown"
       [ngClass]="{ 'dropdown-menu-active': isDropdownOpen }"
     >
       <img
         *ngIf="isLoginSuccess"
-        appDropdownProfile
         [src]="
           isUserMale
             ? '../../assets/icons/male-user-header.png'
@@ -34,7 +21,7 @@
       />
       <div class="dropdown-menu">
         <a href="#" class="dropdown-item">Change Password</a>
-        <a href="#" class="dropdown-item">Sign Out</a>
+        <a href="#" class="dropdown-item" (click)="onSignOut()">Sign Out</a>
       </div>
     </div>
 

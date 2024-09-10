@@ -1,65 +1,58 @@
 @use "../styles/variables" as *;
+@use "../styles/mixins" as *;
 
 .backdrop {
-  background-color: rgba(0, 0, 0, 0.6); /* Darker backdrop for better focus */
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @include overlay(black, 0.6);
 }
 
 dialog {
   width: 90%;
-  max-width: 30rem; /* Adjusted for a sleeker look */
-  background-color: #1e3a5a; /* Slightly darker shade */
-  border-radius: 8px; /* Slightly larger radius for smoother corners */
+  max-width: 30rem;
+  background-color: #1e3a5a;
+  border-radius: 8px;
   border: none;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2); /* Softer, larger shadow */
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
   overflow: hidden;
-  padding: 1.5rem; /* Increased padding for a cleaner layout */
-  transform: translateY(50%); /* Centers dialog vertically */
+  padding: 1.5rem;
+  transform: translateY(50%);
 }
 
 h2 {
-  margin: 0 0 1rem; /* Space below header */
-  color: $primary-color; /* Maintains primary branding */
-  font-size: 1.5rem; /* Emphasize the header */
+  margin: 0 0 1rem;
+  color: $primary-color;
+  font-size: 1.5rem;
   font-weight: 600;
-  text-align: center; /* Center-align for focus */
+  text-align: center;
 }
 
 label {
   display: block;
   font-weight: 600;
-  font-size: 0.9rem; /* Slightly larger for readability */
-  color: #c4d4e0; /* Muted secondary color */
-  margin-bottom: 0.5rem; /* Space below labels */
+  font-size: 0.9rem;
+  color: #c4d4e0;
+  margin-bottom: 0.5rem;
 }
 
 input {
   width: 100%;
   font: inherit;
-  padding: 0.5rem 0.75rem; /* Increased padding for better input experience */
+  padding: 0.5rem 0.75rem;
   border-radius: 4px;
-  border: 1px solid #cfdde7; /* Softer border color */
-  background-color: #f4f9ff; /* Lighter background for inputs */
-  margin-bottom: 1rem; /* Space below inputs */
+  border: 1px solid #cfdde7;
+  background-color: #f4f9ff;
+  margin-bottom: 1rem;
   transition: border-color 0.3s;
 }
 
 input:focus {
-  border-color: #359ad4; /* Highlight input on focus */
-  outline: none; /* Remove default outline */
+  border-color: #359ad4;
+  outline: none;
 }
 
 .actions {
   display: flex;
   justify-content: flex-end;
-  gap: 0.5rem; /* More spacing between buttons */
+  gap: 0.5rem;
   margin-top: 1rem;
 }
 
@@ -67,47 +60,43 @@ button {
   font: inherit;
   cursor: pointer;
   border: none;
-  padding: 0.5rem 1.5rem; /* Increased padding for a more substantial feel */
+  padding: 0.5rem 1.5rem;
   border-radius: 4px;
-  transition: background-color 0.3s, color 0.3s, box-shadow 0.3s; /* Smooth transitions */
+  transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
 }
 
 button[type="button"] {
   background-color: transparent;
-  color: #fabfcb; /* Retained accent color */
+  color: #fabfcb;
 }
 
 button[type="button"]:hover,
 button[type="button"]:active {
-  color: #f78da7; /* Slightly lighter on hover */
+  color: #f78da7;
 }
 
 button[type="submit"] {
-  background-color: #359ad4; /* Brand color for the primary action */
+  background-color: #359ad4;
   color: white;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 button[type="submit"]:hover,
 button[type="submit"]:active {
-  background-color: #2b7cab; /* Darker shade on hover */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Enhanced shadow */
+  background-color: #2b7cab;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 .error-data {
-  background-color: rgb(
-    44,
-    83,
-    103
-  ) !important; /* Ensuring error data stands out */
+  background-color: rgb(44, 83, 103) !important;
   pointer-events: none;
-  padding: 1rem; /* Adequate padding for visibility */
-  border-radius: 6px; /* Rounded edges for consistency */
-  text-align: center; /* Center-align error messages */
+  padding: 1rem;
+  border-radius: 6px;
+  text-align: center;
 }
 
 @media (min-width: 768px) {
   dialog {
-    padding: 2rem; /* Increased padding on larger screens */
+    padding: 2rem;
   }
 }
