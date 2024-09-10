@@ -18,6 +18,7 @@ import { MainStartupComponent } from './components/main-startup/main-startup.com
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { DashboardItemComponent } from './components/dashboard/dashboard-item/dashboard-item.component';
 import { ClientsComponent } from './components/clients/clients.component';
+import { HeaderItemComponent } from './components/shared/header-item/header-item.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { ClientsComponent } from './components/clients/clients.component';
     DashboardComponent,
     DashboardItemComponent,
     ClientsComponent,
+    HeaderItemComponent,
   ],
   imports: [BrowserModule, FormsModule, HttpClientModule, AppRoutingModule],
   providers: [LoginScreenService, UsersService, ClientsService],
