@@ -1,0 +1,81 @@
+@use "~@angular/material/theming" as *;
+@include mat-core();
+
+$primary: mat-palette($mat-blue);
+$accent: mat-palette($mat-green);
+$warn: mat-palette($mat-red);
+
+$theme: mat-light-theme($primary, $accent, $warn);
+
+@include angular-material-theme($theme);
+
+table {
+  width: 99.2%;
+  border-collapse: separate; // Change to separate to allow border-radius
+  border-spacing: 0; // Reset spacing to ensure border-radius works
+  margin-left: 1rem;
+  border-radius: 8px; // Adjust this value for desired roundness
+  overflow: hidden; // Ensure rounded corners are applied to child elements
+
+  // Style for the table header and cells
+  mat-header-cell {
+    background-color: mat-color($primary);
+    color: white;
+  }
+
+  mat-cell {
+    padding: 16px;
+  }
+
+  mat-row {
+    &:nth-child(odd) {
+      background-color: #f9f9f9;
+    }
+  }
+
+  mat-header-row {
+    height: 56px;
+  }
+
+  mat-row {
+    height: 48px;
+  }
+
+  // Styling for the Actions column
+  .mat-column-Actions {
+    text-align: center;
+
+    button {
+      margin: 0 4px;
+      padding: 4px 8px;
+      font-size: 14px;
+      cursor: pointer;
+      border: none;
+      border-radius: 4px;
+
+      &.mat-raised-button {
+        min-width: 80px;
+      }
+
+      &.mat-button {
+        min-width: 60px;
+      }
+
+      &:first-child {
+        background-color: mat-color($primary);
+        color: white;
+        &:hover {
+          background-color: mat-color($primary, 600);
+        }
+      }
+
+      &:last-child {
+        background-color: mat-color($warn);
+        color: white;
+        &:hover {
+          background-color: mat-color($warn, 600);
+        }
+      }
+    }
+  }
+}

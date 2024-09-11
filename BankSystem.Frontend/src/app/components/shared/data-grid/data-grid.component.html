@@ -1,1 +1,64 @@
-<p>data-grid works!</p>
+<table mat-table [dataSource]="clientsData" class="mat-elevation-z8">
+  <!-- Id Column -->
+  <ng-container matColumnDef="Id">
+    <th mat-header-cell *matHeaderCellDef>Id</th>
+    <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+  </ng-container>
+
+  <!-- Account Number Column -->
+  <ng-container matColumnDef="Account Number">
+    <th mat-header-cell *matHeaderCellDef>Account Number</th>
+    <td mat-cell *matCellDef="let element">{{ element.accountNumber }}</td>
+  </ng-container>
+
+  <!-- Full Name Column -->
+  <ng-container matColumnDef="Full Name">
+    <th mat-header-cell *matHeaderCellDef>Full Name</th>
+    <td mat-cell *matCellDef="let element">{{ element.fullName }}</td>
+  </ng-container>
+
+  <!-- Gender Column -->
+  <ng-container matColumnDef="Gender">
+    <th mat-header-cell *matHeaderCellDef>Gender</th>
+    <td mat-cell *matCellDef="let element">{{ element.gender }}</td>
+  </ng-container>
+
+  <!-- Phone Column -->
+  <ng-container matColumnDef="Phone">
+    <th mat-header-cell *matHeaderCellDef>Phone</th>
+    <td mat-cell *matCellDef="let element">{{ element.phone }}</td>
+  </ng-container>
+
+  <!-- Email Column -->
+  <ng-container matColumnDef="Email">
+    <th mat-header-cell *matHeaderCellDef>Email</th>
+    <td mat-cell *matCellDef="let element">
+      {{ element.email ? element.email : "UNKNOWN" }}
+    </td>
+  </ng-container>
+
+  <!-- Balance Column -->
+  <ng-container matColumnDef="Balance">
+    <th mat-header-cell *matHeaderCellDef>Balance</th>
+    <td mat-cell *matCellDef="let element">{{ element.balance | currency }}</td>
+  </ng-container>
+
+  <!-- Status Column -->
+  <ng-container matColumnDef="Status">
+    <th mat-header-cell *matHeaderCellDef>Status</th>
+    <td mat-cell *matCellDef="let element">{{ element.status }}</td>
+  </ng-container>
+
+  <!-- Actions Column -->
+  <ng-container matColumnDef="Actions">
+    <th mat-header-cell *matHeaderCellDef>Actions</th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-button (click)="updateRow(element)">Update</button>
+      <button mat-button (click)="removeRow(element)">Remove</button>
+    </td>
+  </ng-container>
+
+  <!-- Header and Row Definitions -->
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>

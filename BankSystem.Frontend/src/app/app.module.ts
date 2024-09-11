@@ -3,6 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { MatTableModule } from '@angular/material/table';
 
 import { LoginScreenService } from './services/login-screen.service';
 import { UsersService } from './services/users.service';
@@ -38,7 +40,14 @@ import { DataGridComponent } from './components/shared/data-grid/data-grid.compo
     FilterComponent,
     DataGridComponent,
   ],
-  imports: [BrowserModule, FormsModule, HttpClientModule, AppRoutingModule],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    HttpClientModule,
+    AppRoutingModule,
+    NoopAnimationsModule,
+    MatTableModule,
+  ],
   providers: [LoginScreenService, UsersService, ClientsService],
   bootstrap: [AppComponent],
 })
