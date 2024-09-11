@@ -1,8 +1,14 @@
 <section>
   <app-header-item titleName="Dashboard"></app-header-item>
   <div class="dashboard-items-container">
-    <app-dashboard-item itemName="Clients" [itemCount]="5"></app-dashboard-item>
-    <app-dashboard-item itemName="Users" [itemCount]="6"></app-dashboard-item>
+    <app-dashboard-item
+      itemName="Clients"
+      [itemCount]="clientsCount"
+    ></app-dashboard-item>
+    <app-dashboard-item
+      itemName="Users"
+      [itemCount]="usersCount"
+    ></app-dashboard-item>
     <app-dashboard-item
       itemName="Transactions"
       [itemCount]="7"

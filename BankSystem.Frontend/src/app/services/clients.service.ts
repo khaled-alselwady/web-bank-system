@@ -16,6 +16,11 @@ export class ClientsService {
       .pipe(catchError(this.handleError));
   }
 
+  count() {
+    return this.http
+      .get<number>(`${this.baseUrl}count`)
+      .pipe(catchError(this.handleError));
+  }
 
   // Error handling
   private handleError(error: HttpErrorResponse) {

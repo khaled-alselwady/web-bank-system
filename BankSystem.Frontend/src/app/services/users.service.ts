@@ -40,7 +40,11 @@ export class UsersService {
       .pipe(catchError(this.handleError));
   }
 
-
+  count() {
+    return this.http
+      .get<number>(`${this.baseUrl}count`)
+      .pipe(catchError(this.handleError));
+  }
 
   signOut() {
     this.currentUser = undefined;
