@@ -1,6 +1,5 @@
+// src/app/data-grid.component.ts
 import { Component, Input, OnInit } from '@angular/core';
-import { ClientView } from 'src/app/models/client/client-view.model';
-import { ClientsService } from 'src/app/services/clients.service';
 
 @Component({
   selector: 'app-data-grid',
@@ -8,33 +7,33 @@ import { ClientsService } from 'src/app/services/clients.service';
   styleUrls: ['./data-grid.component.scss'],
 })
 export class DataGridComponent implements OnInit {
-removeRow(_t99: any) {
-throw new Error('Method not implemented.');
-}
-updateRow(_t99: any) {
-throw new Error('Method not implemented.');
-}
-  displayedColumns: string[] = [
-    'Id',
-    'Account Number',
-    'Full Name',
-    'Gender',
-    'Phone',
-    'Email',
-    'Balance',
-    'Status',
-    'Actions',
-  ];
+  @Input() displayedColumns: string[] = [];
   @Input() dataSource: any[] = [];
 
-  clientsData: ClientView[] = [];
+  @Input() actions: {
+    update: (element: any) => void;
+    remove: (element: any) => void;
+  } = {
+    update: () => {},
+    remove: () => {},
+  };
 
-  constructor(private clientsService: ClientsService) {}
+  constructor() {}
 
   ngOnInit() {
-    this.clientsService.fetchAll().subscribe((data) => {
-      console.log(data);
-      this.clientsData = data;
-    });
+    // console.log('Displayed Columns:', this.displayedColumns);
+    // console.log('Data Source:', this.dataSource);
+  }
+
+  convertToCamelCase(column: string) {
+    // we should convert the column to camel case because element['name'] => the name has to be camel case
+    return column
+      .split(' ')
+      .map((word, index) => {
+        return index == 0
+          ? word.toLowerCase()
+          : word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+      })
+      .join('');
   }
 }

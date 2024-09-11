@@ -24,6 +24,7 @@ import { HeaderItemComponent } from './components/shared/header-item/header-item
 import { FilterComponent } from './components/shared/filter/filter.component';
 import { DataGridComponent } from './components/shared/data-grid/data-grid.component';
 import { StatueColorPipe } from './pipes/status-color.pipe';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
