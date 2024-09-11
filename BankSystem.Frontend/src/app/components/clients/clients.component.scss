@@ -1,0 +1,17 @@
+@use "../../styles/mixins" as *;
+
+:host {
+  flex: 1;
+}
+
+section {
+  color: black;
+  margin-top: 6rem;
+  margin-left: 1rem;
+  padding: 1rem;
+  padding-left: 0;
+  border-radius: 4px;
+  div {
+    margin-left: 1rem;
+  }
+}
