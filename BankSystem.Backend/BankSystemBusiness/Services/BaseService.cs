@@ -172,5 +172,23 @@ namespace BankSystem.Business.Services
                    ? await _dbSet.CountAsync()
                    : await _dbSet.CountAsync(predicate);
         }
+
+        protected async Task<List<TView>> PagerAsync<TView, TKey>(short pageNumber, int pageSize, Expression<Func<TView, TKey>> orderBy) where TView : class
+        {
+            return await _context.Set<TView>()
+                .OrderBy(orderBy)
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+        }
+
+        protected async Task<List<TView>> PagerAsync<TView, TKey>(Expression<Func<TView, bool>> lastKeyPredicate, int pageSize, Expression<Func<TView, TKey>> orderBy) where TView : class
+        {
+            return await _context.Set<TView>()
+                .Where(lastKeyPredicate)
+                .OrderBy(orderBy)
+                .Take(pageSize)
+                .ToListAsync();
+        }
     }
 }

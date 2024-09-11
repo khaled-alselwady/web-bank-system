@@ -94,11 +94,24 @@ namespace BankSystem.API.Controllers
                 : Task.FromResult<ActionResult<bool>>(HandleBadRequest("Person ID must be greater than zero."));
 
         [HttpGet("count", Name = "CountClients")]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public Task<ActionResult<int>> Count() =>
              HandleRequestAsync(() => _clientService.CountClientsAsync(), "Error occurred while count the clients.");
+
+        [HttpGet("pageUsingPageNumber/{pageNumber:int}/{pageSize:int}", Name = "PagerClientsUsingPageNumber")]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public Task<ActionResult<List<ClientInfoView>>> PagerUsingPageNumber([FromRoute] short pageNumber, [FromRoute] int pageSize) =>
+             HandleRequestAsync(() => _clientService.PagerClientsUsingPageNumber(pageNumber, pageSize), "Error occurred while fetch the clients.");
+
+        [HttpGet("pageUsingLastId/{lastId:int}/{pageSize:int}", Name = "PagerClientsUsingLastId")]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public Task<ActionResult<List<ClientInfoView>>> PagerUsingLastId([FromRoute] int lastId, [FromRoute] int pageSize) =>
+             HandleRequestAsync(() => _clientService.PagerClientsUsingLastId(lastId, pageSize), "Error occurred while fetch the clients.");
     }
 }

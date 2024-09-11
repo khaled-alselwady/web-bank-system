@@ -132,6 +132,7 @@ namespace BankSystem.API.Controllers
                 ? HandleRequestAsync(() => _userService.ExistsByUsernameAndPasswordAsync(username, password), $"Error occurred while checking existence of user with username: {username} and password.")
                 : Task.FromResult<ActionResult<bool>>(HandleBadRequest("Username and password are required."));
 
+
         [HttpGet("isActive/{id:int}", Name = "IsUserActive")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -142,12 +143,28 @@ namespace BankSystem.API.Controllers
              ? HandleRequestAsync(() => _userService.IsUserActive(id), $"Error occurred while checking the activity of the user with ID: {id}.")
              : Task.FromResult<ActionResult<bool>>(HandleBadRequest("ID must be greater than zero."));
 
+
         [HttpGet("count", Name = "CountUsers")]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public Task<ActionResult<int>> Count() =>
              HandleRequestAsync(() => _userService.CountUsersAsync(), "Error occurred while count the users.");
+
+
+        [HttpGet("pageUsingPageNumber/{pageNumber:int}/{pageSize:int}", Name = "PagerUsersUsingPageNumber")]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public Task<ActionResult<List<UserInfoView>>> PagerUsingPageNumber([FromRoute] short pageNumber, [FromRoute] int pageSize) =>
+             HandleRequestAsync(() => _userService.PagerUsersUsingPageNumber(pageNumber, pageSize), "Error occurred while fetch the users.");
+
+
+        [HttpGet("pageUsingLastId/{lastId:int}/{pageSize:int}", Name = "PagerUsersUsingLastId")]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public Task<ActionResult<List<UserInfoView>>> PagerUsingLastId([FromRoute] short lastId, [FromRoute] int pageSize) =>
+             HandleRequestAsync(() => _userService.PagerUsersUsingLastId(lastId, pageSize), "Error occurred while fetch the users.");
     }
 }
