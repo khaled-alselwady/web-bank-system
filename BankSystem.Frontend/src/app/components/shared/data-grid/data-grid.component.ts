@@ -1,12 +1,11 @@
-// src/app/data-grid.component.ts
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-data-grid',
   templateUrl: './data-grid.component.html',
   styleUrls: ['./data-grid.component.scss'],
 })
-export class DataGridComponent implements OnInit {
+export class DataGridComponent {
   @Input() displayedColumns: string[] = [];
   @Input() dataSource: any[] = [];
 
@@ -20,13 +19,7 @@ export class DataGridComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit() {
-    // console.log('Displayed Columns:', this.displayedColumns);
-    // console.log('Data Source:', this.dataSource);
-  }
-
   convertToCamelCase(column: string) {
-    // we should convert the column to camel case because element['name'] => the name has to be camel case
     return column
       .split(' ')
       .map((word, index) => {

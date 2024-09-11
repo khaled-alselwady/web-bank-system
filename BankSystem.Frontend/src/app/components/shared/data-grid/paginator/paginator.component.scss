@@ -1,0 +1,49 @@
+@use "../../../../styles/mixins" as *;
+
+section {
+  @include flex-center;
+  justify-content: flex-end;
+  width: 99.2%;
+  color: gray;
+  padding: 0.8rem;
+  font-size: 1.1rem;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  color: black;
+  margin: 1.5rem 1rem;
+
+  div {
+  }
+
+  .page-number-info,
+  label {
+    font-size: 0.8rem;
+    margin-right: 1rem;
+    margin-left: 1rem;
+    color: gray;
+  }
+
+  select {
+    padding: 0.6rem 0.6rem 0.4rem 0.6rem;
+    font-size: 0.8rem;
+    margin-right: 1rem;
+    border: none;
+    border-bottom: 1px solid #667484;
+    outline: none;
+    background-color: transparent;
+    transition: border-color 0.2s;
+    cursor: pointer;
+
+    &:focus {
+      border-color: #359ad4;
+    }
+  }
+
+  .arrow {
+    font-size: 2rem;
+    margin-left: 1.5rem;
+    cursor: pointer;
+    color: rgb(175, 175, 175);
+  }
+}

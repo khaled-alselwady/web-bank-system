@@ -1,0 +1,21 @@
+<section>
+  <div>
+    <label for="items">Items per page:</label>
+    <select name="items-per-page" id="itmes">
+      <option *ngFor="let size of sizes">
+        {{ size }}
+      </option>
+    </select>
+  </div>
+
+  <div class="page-number-info">{{ currentPage }} of {{ totalPages }}</div>
+
+  <div>
+    <span class="arrow go-to-first">&laquo;</span>
+    <span class="arrow next-one">&lsaquo;</span>
+    <span class="arrow previous-one">&rsaquo;</span>
+    <span class="arrow go-to-last">&raquo;</span>
+  </div>
+
+  <div></div>
+</section>
