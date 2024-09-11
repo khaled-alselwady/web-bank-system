@@ -22,6 +22,14 @@ export class ClientsService {
       .pipe(catchError(this.handleError));
   }
 
+  pagerUserPageNumber(pageNumber: number, pageSize: number) {
+    return this.http
+      .get<ClientView[]>(
+        `${this.baseUrl}pageUsingPageNumber/${pageNumber}/${pageSize}`
+      )
+      .pipe(catchError(this.handleError));
+  }
+
   // Error handling
   private handleError(error: HttpErrorResponse) {
     let errorMessage = 'Unknown error!';
