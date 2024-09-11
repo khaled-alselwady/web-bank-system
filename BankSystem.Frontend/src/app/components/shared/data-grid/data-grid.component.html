@@ -5,13 +5,15 @@
       <th mat-header-cell *matHeaderCellDef>{{ column }}</th>
       <td mat-cell *matCellDef="let element">
         <!-- Handle special cases like Actions column -->
-        <ng-container *ngIf="column === 'Actions'; else statusOrNormalCell">
+        <ng-container
+          *ngIf="column === 'Actions'; else statusOrBalanceOrNormalCell"
+        >
           <button mat-button (click)="actions.update(element)">Update</button>
           <button mat-button (click)="actions.remove(element)">Remove</button>
         </ng-container>
 
-        <ng-template #statusOrNormalCell>
-          <ng-container *ngIf="column === 'Status'; else normalCell">
+        <ng-template #statusOrBalanceOrNormalCell>
+          <ng-container *ngIf="column === 'Status'; else balanceOrNormalCell">
             <!-- Special handling for Status column -->
             <span
               [ngStyle]="{
@@ -19,13 +21,31 @@
                   element.status
                   | statusColor : 'rgb(0, 215, 86)' : 'rgb(215, 0, 0)'
               }"
-              >{{ element[convertToCamelCase(column)] }}</span
+              >{{ element.status || "UNKNOWN" }}</span
+            >
+          </ng-container>
+        </ng-template>
+
+        <ng-template #balanceOrNormalCell>
+          <ng-container *ngIf="column === 'Balance'; else normalCell">
+            <span
+              [ngStyle]="{
+                color: element.balance ? 'black' : 'rgb(191, 191, 133)'
+              }"
+              >{{ (element.balance | currency) || "UNKNOWN" }}</span
             >
           </ng-container>
         </ng-template>
 
         <ng-template #normalCell>
-          {{ element[convertToCamelCase(column)] }}
+          <span
+            [ngStyle]="{
+              color: element[convertToCamelCase(column)]
+                ? 'black'
+                : 'rgb(191, 191, 133)'
+            }"
+            >{{ element[convertToCamelCase(column)] || "UNKNOWN" }}</span
+          >
         </ng-template>
       </td>
     </ng-container>

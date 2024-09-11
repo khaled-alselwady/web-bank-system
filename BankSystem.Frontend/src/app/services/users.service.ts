@@ -4,12 +4,19 @@ import { User } from '../models/user/user.model';
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { UserView } from '../models/user/user-view.model';
 
 @Injectable({ providedIn: 'root' })
 export class UsersService {
   private baseUrl = 'http://localhost:5006/api/users/';
   currentUser: User | undefined = undefined;
   constructor(private http: HttpClient, private router: Router) {}
+
+  fetchAll() {
+    return this.http
+      .get<UserView[]>(`${this.baseUrl}all`)
+      .pipe(catchError(this.handleError));
+  }
 
   findUserByUsernameAndPassword(username: string, password: string) {
     return this.http

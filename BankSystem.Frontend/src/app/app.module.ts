@@ -23,8 +23,8 @@ import { ClientsComponent } from './components/clients/clients.component';
 import { HeaderItemComponent } from './components/shared/header-item/header-item.component';
 import { FilterComponent } from './components/shared/filter/filter.component';
 import { DataGridComponent } from './components/shared/data-grid/data-grid.component';
+import { UsersComponent } from './components/users/users.component';
 import { StatueColorPipe } from './pipes/status-color.pipe';
-import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -42,6 +42,7 @@ import { MatButtonModule } from '@angular/material/button';
     FilterComponent,
     DataGridComponent,
     StatueColorPipe,
+    UsersComponent,
   ],
   imports: [
     BrowserModule,
