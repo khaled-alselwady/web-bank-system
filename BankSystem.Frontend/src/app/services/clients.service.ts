@@ -16,6 +16,7 @@ export class ClientsService {
       .pipe(catchError(this.handleError));
   }
 
+
   // Error handling
   private handleError(error: HttpErrorResponse) {
     let errorMessage = 'Unknown error!';

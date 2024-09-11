@@ -92,5 +92,13 @@ namespace BankSystem.API.Controllers
             personId > 0
                 ? HandleRequestAsync(() => _clientService.ExistsByPersonIdAsync(personId), $"Error occurred while checking existence of client with Person ID: {personId}.")
                 : Task.FromResult<ActionResult<bool>>(HandleBadRequest("Person ID must be greater than zero."));
+
+        [HttpGet("count", Name = "CountClients")]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public Task<ActionResult<int>> Count() =>
+             HandleRequestAsync(() => _clientService.CountClientsAsync(), "Error occurred while count the clients.");
     }
 }

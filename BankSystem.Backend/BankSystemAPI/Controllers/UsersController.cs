@@ -133,9 +133,21 @@ namespace BankSystem.API.Controllers
                 : Task.FromResult<ActionResult<bool>>(HandleBadRequest("Username and password are required."));
 
         [HttpGet("isActive/{id:int}", Name = "IsUserActive")]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public Task<ActionResult<bool>> IsUserActive([FromRoute] int id) =>
         id > 0
              ? HandleRequestAsync(() => _userService.IsUserActive(id), $"Error occurred while checking the activity of the user with ID: {id}.")
              : Task.FromResult<ActionResult<bool>>(HandleBadRequest("ID must be greater than zero."));
+
+        [HttpGet("count", Name = "CountUsers")]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public Task<ActionResult<int>> Count() =>
+             HandleRequestAsync(() => _userService.CountUsersAsync(), "Error occurred while count the users.");
     }
 }

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { ClientsService } from 'src/app/services/clients.service';
 import { UsersService } from 'src/app/services/users.service';
 
@@ -7,13 +8,6 @@ import { UsersService } from 'src/app/services/users.service';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 })
-export class DashboardComponent implements OnInit {
-  constructor(
-    private clientsService: ClientsService,
-    private usersService: UsersService
-  ) {}
+export class DashboardComponent  {
 
-  //clientsCount
-
-  ngOnInit(): void {}
 }

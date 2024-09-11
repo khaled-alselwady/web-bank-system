@@ -43,6 +43,9 @@ namespace BankSystem.Business.Services
 
         public async Task<bool> ExistsByPersonIdAsync(int personId)
             => await ExistsAsync(c => c.PersonId == personId);
+
+        public async Task<int> CountClientsAsync()
+           => await CountAsync();
     }
 
 }

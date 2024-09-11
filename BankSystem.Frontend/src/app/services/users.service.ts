@@ -40,6 +40,8 @@ export class UsersService {
       .pipe(catchError(this.handleError));
   }
 
+
+
   signOut() {
     this.currentUser = undefined;
     this.router.navigate(['']);

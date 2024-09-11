@@ -165,5 +165,12 @@ namespace BankSystem.Business.Services
                 throw;
             }
         }
+
+        protected async Task<int> CountAsync(Expression<Func<TEntity, bool>>? predicate = null)
+        {
+            return predicate == null
+                   ? await _dbSet.CountAsync()
+                   : await _dbSet.CountAsync(predicate);
+        }
     }
 }

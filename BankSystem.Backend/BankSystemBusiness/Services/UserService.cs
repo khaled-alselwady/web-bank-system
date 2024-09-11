@@ -59,5 +59,7 @@ namespace BankSystem.Business.Services
         public async Task<bool> IsUserActive(int id)
             => await ExistsAsync(u => u.Id == id && u.IsActive);
 
+        public async Task<int> CountUsersAsync()
+            => await CountAsync();
     }
 }
