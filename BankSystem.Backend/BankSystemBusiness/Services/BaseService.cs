@@ -182,13 +182,32 @@ namespace BankSystem.Business.Services
                 .ToListAsync();
         }
 
-        protected async Task<List<TView>> PagerAsync<TView, TKey>(Expression<Func<TView, bool>> lastKeyPredicate, int pageSize, Expression<Func<TView, TKey>> orderBy) where TView : class
+        protected async Task<List<TView>> PagerAsync<TView, TKey>(
+            Expression<Func<TView, bool>> lastKeyPredicate,
+            int pageSize,
+            Expression<Func<TView, TKey>> orderBy,
+            bool isNextPage = true)
+            where TView : class
         {
-            return await _context.Set<TView>()
-                .Where(lastKeyPredicate)
-                .OrderBy(orderBy)
-                .Take(pageSize)
-                .ToListAsync();
+            var query = _context.Set<TView>().Where(lastKeyPredicate);
+
+            if (isNextPage)
+            {
+                query = query.OrderBy(orderBy);
+            }
+            else
+            {
+                query = query.OrderByDescending(orderBy);
+            }
+
+            var result = await query.Take(pageSize).ToListAsync();
+
+            if (!isNextPage)
+            {
+                result.Reverse();
+            }
+
+            return result;
         }
     }
 }

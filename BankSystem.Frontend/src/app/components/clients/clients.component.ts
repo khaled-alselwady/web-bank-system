@@ -1,3 +1,4 @@
+
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ClientsService } from 'src/app/services/clients.service';
 
@@ -42,18 +43,20 @@ export class ClientsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscriptions.push(
-      this.clientsService.pagerByPageNumber(1, 10).subscribe((data) => {
+      this.clientsService.pagerUserByPageNumber(1, 10).subscribe((data) => {
         this.clientsData = data;
         this.getCountClients();
       })
     );
   }
 
-  onChangePageNumber(pageSize: number) {
+  onChangePageNumber(event: { pageNumber: number; pageSize: number }) {
     this.subscriptions.push(
-      this.clientsService.pagerByPageNumber(5, pageSize).subscribe((data) => {
-        this.clientsData = data;
-      })
+      this.clientsService
+        .pagerUserByPageNumber(event.pageNumber, event.pageSize)
+        .subscribe((data) => {
+          this.clientsData = data;
+        })
     );
   }
 

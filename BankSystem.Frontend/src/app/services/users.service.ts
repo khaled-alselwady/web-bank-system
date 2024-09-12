@@ -46,6 +46,14 @@ export class UsersService {
       .pipe(catchError(this.handleError));
   }
 
+  pagerUserByPageNumber(pageNumber: number, pageSize: number) {
+    return this.http
+      .get<UserView[]>(
+        `${this.baseUrl}pageUsingPageNumber/${pageNumber}/${pageSize}`
+      )
+      .pipe(catchError(this.handleError));
+  }
+
   signOut() {
     this.currentUser = undefined;
     this.router.navigate(['']);

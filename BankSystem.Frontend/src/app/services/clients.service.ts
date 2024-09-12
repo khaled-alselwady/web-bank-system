@@ -22,17 +22,11 @@ export class ClientsService {
       .pipe(catchError(this.handleError));
   }
 
-  pagerByPageNumber(pageNumber: number, pageSize: number) {
+  pagerUserByPageNumber(pageNumber: number, pageSize: number) {
     return this.http
       .get<ClientView[]>(
         `${this.baseUrl}pageUsingPageNumber/${pageNumber}/${pageSize}`
       )
-      .pipe(catchError(this.handleError));
-  }
-
-  pagerByLastId(lastId: number, pageSize: number) {
-    return this.http
-      .get<ClientView[]>(`${this.baseUrl}pageUsingLastId/${lastId}/${pageSize}`)
       .pipe(catchError(this.handleError));
   }
 

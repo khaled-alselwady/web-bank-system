@@ -50,13 +50,22 @@ namespace BankSystem.Business.Services
         public async Task<List<ClientInfoView>> PagerClientsUsingPageNumber(short pageNumber, int pageSize)
              => await PagerAsync<ClientInfoView, int>(pageNumber, pageSize, cv => cv.Id);
 
-        public async Task<List<ClientInfoView>> PagerClientsUsingLastId(int lastId, int pageSize)
+        public async Task<List<ClientInfoView>> PagerClientsUsingLastIdForward(int lastId, int pageSize)
             => await PagerAsync<ClientInfoView, int>
             (
                 cv => cv.Id > lastId,
                 pageSize,
                 cv => cv.Id
             );
+
+        public async Task<List<ClientInfoView>> PagerClientsUsingLastIdBackward(int lastId, int pageSize)
+           => await PagerAsync<ClientInfoView, int>
+           (
+               cv => cv.Id <= lastId,
+               pageSize,
+               cv => cv.Id,
+               false
+           );
     }
 
 }

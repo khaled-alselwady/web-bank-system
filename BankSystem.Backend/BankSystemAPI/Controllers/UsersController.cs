@@ -160,11 +160,18 @@ namespace BankSystem.API.Controllers
              HandleRequestAsync(() => _userService.PagerUsersUsingPageNumber(pageNumber, pageSize), "Error occurred while fetch the users.");
 
 
-        [HttpGet("pageUsingLastId/{lastId:int}/{pageSize:int}", Name = "PagerUsersUsingLastId")]
+        [HttpGet("pageUsingLastIdForward/{lastId:int}/{pageSize:int}", Name = "PagerUsersUsingLastIdForward")]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public Task<ActionResult<List<UserInfoView>>> PagerUsingLastId([FromRoute] short lastId, [FromRoute] int pageSize) =>
-             HandleRequestAsync(() => _userService.PagerUsersUsingLastId(lastId, pageSize), "Error occurred while fetch the users.");
+        public Task<ActionResult<List<UserInfoView>>> PagerUsingLastIdForward([FromRoute] short lastId, [FromRoute] int pageSize) =>
+             HandleRequestAsync(() => _userService.PagerUsersUsingLastIdForward(lastId, pageSize), "Error occurred while fetch the users.");
+
+        [HttpGet("pageUsingLastIdBackward/{lastId:int}/{pageSize:int}", Name = "PagerUsersUsingLastIdWithPrevious")]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public Task<ActionResult<List<UserInfoView>>> PagerUsingLastIdBackward([FromRoute] short lastId, [FromRoute] int pageSize) =>
+             HandleRequestAsync(() => _userService.PagerUsersUsingLastIdBackward(lastId, pageSize), "Error occurred while fetch the users.");
     }
 }
