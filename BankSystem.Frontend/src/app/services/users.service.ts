@@ -46,7 +46,7 @@ export class UsersService {
       .pipe(catchError(this.handleError));
   }
 
-  pagerUserByPageNumber(pageNumber: number, pageSize: number) {
+  pagerUsersByPageNumber(pageNumber: number, pageSize: number) {
     return this.http
       .get<UserView[]>(
         `${this.baseUrl}pageUsingPageNumber/${pageNumber}/${pageSize}`

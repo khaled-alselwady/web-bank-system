@@ -2,8 +2,12 @@
 @use "../../styles/variables" as *;
 
 :host {
-  height: 100vh;
   background-color: #f4f4f4;
+  height: 100vh;
+  // position: fixed;
+  // top: 0;
+  // left: 0;
+  // bottom: 0;
 }
 
 ul {
