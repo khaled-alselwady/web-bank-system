@@ -42,20 +42,18 @@ export class ClientsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscriptions.push(
-      this.clientsService.pagerUserByPageNumber(1, 10).subscribe((data) => {
+      this.clientsService.pagerByPageNumber(1, 10).subscribe((data) => {
         this.clientsData = data;
         this.getCountClients();
       })
     );
   }
 
-  onChangePageNumber(event: { pageNumber: number; pageSize: number }) {
+  onChangePageNumber(pageSize: number) {
     this.subscriptions.push(
-      this.clientsService
-        .pagerUserByPageNumber(event.pageNumber, event.pageSize)
-        .subscribe((data) => {
-          this.clientsData = data;
-        })
+      this.clientsService.pagerByPageNumber(5, pageSize).subscribe((data) => {
+        this.clientsData = data;
+      })
     );
   }
 

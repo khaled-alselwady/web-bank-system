@@ -16,10 +16,7 @@ import { Subject, Subscription } from 'rxjs';
 export class PaginatorComponent implements OnInit, OnDestroy {
   @Input() sizes: number[] = [10, 20, 30, 40, 50];
   @Input() totalRecords$?: Subject<number>;
-  @Output() change = new EventEmitter<{
-    pageNumber: number;
-    pageSize: number;
-  }>();
+  @Output() change = new EventEmitter<number>();
   totalRecords: number = 10;
   currentPage: number = 0;
   totalPages: number = 0;
@@ -47,10 +44,7 @@ export class PaginatorComponent implements OnInit, OnDestroy {
     this.currentSize = +selectedOption.value;
     this.totalPages = this.calculateTotalPages(this.currentSize);
 
-    this.change.emit({
-      pageNumber: this.currentPage,
-      pageSize: this.currentSize,
-    });
+    this.change.emit(this.currentSize);
   }
 
   onCurrentPageChanged(newCurrentPageNumber: number) {
@@ -59,10 +53,7 @@ export class PaginatorComponent implements OnInit, OnDestroy {
     }
 
     this.currentPage = newCurrentPageNumber;
-    this.change.emit({
-      pageNumber: this.currentPage,
-      pageSize: this.currentSize,
-    });
+    this.change.emit(this.currentSize);
   }
 
   calculateTotalPages(currentSize: number) {
