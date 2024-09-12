@@ -45,5 +45,11 @@ section {
     margin-left: 1.5rem;
     cursor: pointer;
     color: rgb(175, 175, 175);
+    @include no-select;
+
+    &:hover {
+      color: rgb(100, 100, 100);
+      transition: all 0.13s;
+    }
   }
 }

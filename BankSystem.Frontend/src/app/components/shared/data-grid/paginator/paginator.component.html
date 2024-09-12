@@ -1,7 +1,11 @@
 <section>
   <div>
     <label for="items">Items per page:</label>
-    <select name="items-per-page" id="itmes">
+    <select
+      name="items-per-page"
+      id="itmes"
+      (change)="onCurrentSizeChanged($event)"
+    >
       <option *ngFor="let size of sizes">
         {{ size }}
       </option>
@@ -11,10 +15,27 @@
   <div class="page-number-info">{{ currentPage }} of {{ totalPages }}</div>
 
   <div>
-    <span class="arrow go-to-first">&laquo;</span>
-    <span class="arrow next-one">&lsaquo;</span>
-    <span class="arrow previous-one">&rsaquo;</span>
-    <span class="arrow go-to-last">&raquo;</span>
+    <span class="arrow go-to-first" (click)="onCurrentPageChanged(1)">
+      &laquo;
+    </span>
+
+    <span
+      class="arrow next-one"
+      (click)="onCurrentPageChanged(currentPage - 1)"
+    >
+      &lsaquo;
+    </span>
+
+    <span
+      class="arrow previous-one"
+      (click)="onCurrentPageChanged(currentPage + 1)"
+    >
+      &rsaquo;
+    </span>
+
+    <span class="arrow go-to-last" (click)="onCurrentPageChanged(totalPages)">
+      &raquo;
+    </span>
   </div>
 
   <div></div>
