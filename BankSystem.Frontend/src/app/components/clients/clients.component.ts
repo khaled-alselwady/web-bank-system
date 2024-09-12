@@ -23,6 +23,15 @@ export class ClientsComponent implements OnInit, OnDestroy {
   ];
   clientsData: ClientView[] = [];
   clientsCount$ = new Subject<number>();
+  catagoriesForFiltering = [
+    'Id',
+    'Account Number',
+    'Full Name',
+    'Gender',
+    'Phone',
+    'Email',
+    'Status',
+  ];
 
   subscriptions: Subscription[] = [];
 

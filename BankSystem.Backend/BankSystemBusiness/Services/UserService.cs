@@ -41,6 +41,22 @@ namespace BankSystem.Business.Services
         public async Task<UserDetailsDto?> UpdateUserAsync(int id, CreateOrUpdateUserDto updatedUserDto)
             => await UpdateAsync(updatedUserDto, (query) => query.FirstOrDefaultAsync(u => u.Id == id));
 
+        //public async Task<User?> UpdateUserAsync2(int id, User updatedUser)
+        //{
+        //    User? user = await context.Users.FindAsync(updatedUser.Id);
+
+        //    if (user == null)
+        //    {
+        //        return null;
+        //    }
+
+        //    context.Entry(user).CurrentValues.SetValues(updatedUser);
+
+        //    await context.SaveChangesAsync();
+
+        //    return user;
+        //}
+
         public async Task<bool> DeleteUserAsync(int id)
              => await SoftDeleteAsync(u => u.Id == id);
 

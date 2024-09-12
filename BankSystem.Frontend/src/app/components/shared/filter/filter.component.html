@@ -1,16 +1,34 @@
 <form>
   <p class="search">
     <input
+      *ngIf="!isFilterByGender && !isFilterByStatus"
       type="text"
       placeholder="Filter"
       name="filter"
       [(ngModel)]="enteredText"
     />
+
+    <span *ngIf="isFilterByGender" class="container-select">
+      <label for="gender">Gender</label>
+      <select name="gender" id="gender">
+        <option value="all">All</option>
+        <option>Male</option>
+        <option>Female</option>
+      </select>
+    </span>
+
+    <span *ngIf="isFilterByStatus" class="container-select">
+      <label for="status">Status</label>
+      <select name="status" id="status">
+        <option value="all">All</option>
+        <option>Active</option>
+        <option>Inactive</option>
+      </select>
+    </span>
   </p>
 
   <p>
-    <select name="" id="">
-      <!-- <option value="all">All</option> -->
+    <select name="" id="" (change)="onSelectCategory($event)">
       <option *ngFor="let category of categories">
         {{ category }}
       </option>

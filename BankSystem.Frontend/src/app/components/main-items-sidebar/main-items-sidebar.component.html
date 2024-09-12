@@ -5,9 +5,6 @@
     routerLinkActive="selected"
     (click)="onSelectItem(i)"
   >
-    <app-item-sidebar
-      [item]="getUpdatedItem(item, i)"
-      routerLinkActive="selected"
-    ></app-item-sidebar>
+    <app-item-sidebar [item]="getUpdatedItem(item, i)"></app-item-sidebar>
   </li>
 </ul>

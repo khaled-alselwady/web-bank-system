@@ -117,6 +117,7 @@ namespace BankSystem.Business.Services
                 }
 
                 _mapper.Map(updateDto, entity);
+                //_context.Entry(entity).CurrentValues.SetValues(updateDto);
                 await _context.SaveChangesAsync();
 
                 return _mapper.Map<TDto>(entity);

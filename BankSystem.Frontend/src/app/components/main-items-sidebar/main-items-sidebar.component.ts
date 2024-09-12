@@ -62,6 +62,8 @@ export class MainItemsSidebarComponent {
   }
 
   getUpdatedItem(item: Item, index: number) {
+    console.log(item);
+    console.log(index);
     return {
       ...item,
       image: {

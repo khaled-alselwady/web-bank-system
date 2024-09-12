@@ -2,6 +2,8 @@
   <p>Total {{ itemName }}:</p>
   <p>{{ itemCount }}</p>
   <p>
-    <button>View {{ itemName }}</button>
+    <button [routerLink]="['/', itemName.toLowerCase()]">
+      View {{ itemName }}
+    </button>
   </p>
 </div>
