@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormService } from 'src/app/services/form.service';
 
 @Component({
   selector: 'app-add-edit-client',
@@ -7,12 +8,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./add-edit-client.component.scss'],
 })
 export class AddEditClientComponent implements OnInit {
-onCancel() {
-throw new Error('Method not implemented.');
-}
+  onCancel() {
+    throw new Error('Method not implemented.');
+  }
   clientInfoForm!: FormGroup;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private formService: FormService) {}
 
   ngOnInit(): void {
     this.clientInfoForm = this.fb.group({
@@ -31,5 +32,9 @@ throw new Error('Method not implemented.');
     } else {
       this.clientInfoForm.markAllAsTouched(); // This will trigger validation messages
     }
+  }
+
+  onReset() {
+    this.formService.resetFields.next();
   }
 }

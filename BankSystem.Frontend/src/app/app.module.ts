@@ -30,6 +30,7 @@ import { AddEditPersonComponent } from './components/people/add-edit-person/add-
 import { ErrorMessageInputComponent } from './components/shared/error-message-input/error-message-input.component';
 import { StatueColorPipe } from './pipes/status-color.pipe';
 import { AddEditClientComponent } from './components/clients/add-edit-client/add-edit-client.component';
+import { FormService } from './services/form.service';
 
 @NgModule({
   declarations: [
@@ -67,6 +68,7 @@ import { AddEditClientComponent } from './components/clients/add-edit-client/add
     ClientsDataService,
     UsersService,
     UsersDataService,
+    FormService,
   ],
   bootstrap: [AppComponent],
 })
