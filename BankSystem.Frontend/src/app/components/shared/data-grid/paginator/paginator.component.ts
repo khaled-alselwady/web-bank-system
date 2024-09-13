@@ -7,7 +7,6 @@ import {
   Output,
 } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
-import { ClientsDataService } from 'src/app/services/clients-data.service';
 
 @Component({
   selector: 'app-paginator',
@@ -18,13 +17,17 @@ export class PaginatorComponent implements OnInit, OnDestroy {
   @Input() sizes: number[] = [10, 20, 30, 40, 50];
   @Input() totalRecords$?: Subject<number>;
   @Input() totalRecords: number = 0;
+  @Output() changeData = new EventEmitter<{
+    pageNumber: number;
+    pageSize: number;
+  }>();
   currentPage: number = 0;
   totalPages: number = 0;
   currentSize: number = 10;
 
   private subscription?: Subscription;
 
-  constructor(private clientsDataService: ClientsDataService) {}
+  constructor() {}
 
   ngOnInit(): void {
     this.subscription = this.totalRecords$?.subscribe((count) => {
@@ -57,7 +60,7 @@ export class PaginatorComponent implements OnInit, OnDestroy {
     this.currentSize = +selectedOption.value;
     this.totalPages = this.calculateTotalPages(this.currentSize);
 
-    this.clientsDataService.fetchData({
+    this.changeData.emit({
       pageNumber: this.currentPage,
       pageSize: this.currentSize,
     });
@@ -70,7 +73,7 @@ export class PaginatorComponent implements OnInit, OnDestroy {
 
     this.currentPage = newCurrentPageNumber;
 
-    this.clientsDataService.fetchData({
+    this.changeData.emit({
       pageNumber: this.currentPage,
       pageSize: this.currentSize,
     });

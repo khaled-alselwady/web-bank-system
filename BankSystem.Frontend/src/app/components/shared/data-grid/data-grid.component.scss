@@ -81,3 +81,38 @@ table {
     }
   }
 }
+
+// Styling for the filter inputs and container
+.filter-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding: 0 1rem;
+  padding-right: 0;
+
+  select,
+  input[type="text"] {
+    padding: 8px;
+    border: 1px solid mat-color($primary, 200);
+    border-radius: 4px;
+    margin-right: 8px;
+    font-size: 14px;
+    outline: none;
+
+    &:focus {
+      border-color: mat-color($primary, 400);
+      box-shadow: 0 0 5px mat-color($primary, 200);
+    }
+  }
+
+  select {
+    background-color: #fff;
+    color: mat-color($primary, 800);
+  }
+
+  input[type="text"] {
+    margin-right: 0.2rem;
+    flex-grow: 1;
+    color: mat-color($primary, 800);
+  }
+}

@@ -1,4 +1,48 @@
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+<div class="filter-container">
+  <!-- Filter by category dropdown -->
+  <select [(ngModel)]="selectedCategory" (change)="applyFilter()" (change)="checkGenderOrStatusSelected(selectedCategory)">
+    <option *ngFor="let category of categoriesForFiltering" [value]="category">
+      {{ category }}
+    </option>
+  </select>
+
+  <!-- Filter input -->
+  <input
+    *ngIf="!isFilterByGender && !isFilterByStatus"
+    type="text"
+    placeholder="Enter filter text"
+    [(ngModel)]="filterText"
+    (input)="applyFilter()"
+  />
+
+  <span *ngIf="isFilterByGender" class="container-select">
+    <select
+      #selectedGender
+      name="gender"
+      id="gender"
+      (change)="applyFilterGender(selectedGender.value)"
+    >
+      <option value="all">All</option>
+      <option value="male">Male</option>
+      <option value="female">Female</option>
+    </select>
+  </span>
+
+  <span *ngIf="isFilterByStatus" class="container-select">
+    <select
+      #selectedStatus
+      name="status"
+      id="status"
+      (change)="applyFilterStatus(selectedStatus.value)"
+    >
+      <option value="all">All</option>
+      <option value="active">Active</option>
+      <option value="inactive">Inactive</option>
+    </select>
+  </span>
+</div>
+
+<table mat-table [dataSource]="filteredData" class="mat-elevation-z8">
   <!-- Define columns dynamically -->
   <ng-container *ngFor="let column of displayedColumns">
     <ng-container [matColumnDef]="column">

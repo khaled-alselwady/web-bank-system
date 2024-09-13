@@ -21,6 +21,7 @@ export class UsersComponent implements OnInit, OnDestroy {
   ];
 
   usersData: UserView[] = [];
+  usersData$ = new Subject<UserView[]>();
   usersCount$ = new Subject<number>();
 
   subscriptions: Subscription[] = [];

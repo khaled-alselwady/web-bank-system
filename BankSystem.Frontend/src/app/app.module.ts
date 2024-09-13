@@ -21,12 +21,10 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { DashboardItemComponent } from './components/dashboard/dashboard-item/dashboard-item.component';
 import { ClientsComponent } from './components/clients/clients.component';
 import { HeaderItemComponent } from './components/shared/header-item/header-item.component';
-import { FilterComponent } from './components/shared/filter/filter.component';
 import { DataGridComponent } from './components/shared/data-grid/data-grid.component';
 import { UsersComponent } from './components/users/users.component';
 import { StatueColorPipe } from './pipes/status-color.pipe';
 import { PaginatorComponent } from './components/shared/data-grid/paginator/paginator.component';
-import { ClientsDataService } from './services/clients-data.service';
 
 @NgModule({
   declarations: [
@@ -41,7 +39,6 @@ import { ClientsDataService } from './services/clients-data.service';
     DashboardItemComponent,
     ClientsComponent,
     HeaderItemComponent,
-    FilterComponent,
     DataGridComponent,
     StatueColorPipe,
     UsersComponent,
@@ -59,7 +56,6 @@ import { ClientsDataService } from './services/clients-data.service';
     LoginScreenService,
     UsersService,
     ClientsService,
-    ClientsDataService,
   ],
   bootstrap: [AppComponent],
 })

@@ -7,16 +7,15 @@
     ></app-header-item>
   </div>
 
-  <app-filter [categories]="catagoriesForFiltering"></app-filter>
-
   <app-data-grid
+    [categoriesForFiltering]="catagoriesForFiltering"
     [displayedColumns]="displayedColumnsName"
-    [dataSource]="clientsData"
+    [dataSource$]="clientsData$"
     [actions]="{
       update: updateRow,
       remove: removeRow
     }"
   ></app-data-grid>
 
-  <app-paginator [totalRecords$]="clientsCount$"></app-paginator>
+  <app-paginator [totalRecords$]="clientsCount$" (changeData)="onChangeDataByPaginator($event)"></app-paginator>
 </section>
