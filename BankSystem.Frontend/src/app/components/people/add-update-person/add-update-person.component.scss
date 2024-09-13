@@ -51,6 +51,14 @@ $success-color: #4caf50;
         width: 100%;
       }
 
+      input.ng-invalid.ng-touched:not([type="email"]) {
+        border-color: $error-color;
+      }
+
+      input.ng-invalid.ng-touched:not([type="email"])::placeholder {
+        color: $error-color;
+      }
+
       .text-input {
         width: 100%;
         padding: 0.5rem;

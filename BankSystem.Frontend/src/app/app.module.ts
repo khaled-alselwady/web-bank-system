@@ -31,6 +31,7 @@ import { PaginatorComponent } from './components/shared/data-grid/paginator/pagi
 import { StatueColorPipe } from './pipes/status-color.pipe';
 import { AddUpdatePersonComponent } from './components/people/add-update-person/add-update-person.component';
 import { MatRadioModule } from '@angular/material/radio';
+import { ErrorMessageInputComponent } from './components/shared/error-message-input/error-message-input.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { MatRadioModule } from '@angular/material/radio';
     UsersComponent,
     PaginatorComponent,
     AddUpdatePersonComponent,
+    ErrorMessageInputComponent,
   ],
   imports: [
     BrowserModule,

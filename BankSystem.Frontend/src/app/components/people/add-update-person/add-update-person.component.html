@@ -16,7 +16,9 @@
           personalInfoForm?.get('firstName')?.touched
         "
       >
-        First Name is required
+        <app-error-message-input
+          errorMessage="First Name is required"
+        ></app-error-message-input>
       </span>
     </div>
 
@@ -34,7 +36,9 @@
           personalInfoForm?.get('lastName')?.touched
         "
       >
-        Last Name is required
+        <app-error-message-input
+          errorMessage="Last Name is required"
+        ></app-error-message-input>
       </span>
     </div>
 
@@ -57,7 +61,9 @@
           personalInfoForm?.get('gender')?.touched
         "
       >
-        Gender is required
+        <app-error-message-input
+          errorMessage="Gender is required"
+        ></app-error-message-input>
       </span>
     </div>
 
@@ -65,6 +71,7 @@
       <label for="phone">Phone</label>
       <input
         id="phone"
+        type="tel"
         formControlName="phone"
         placeholder="+1234567890"
         class="text-input"
@@ -75,7 +82,9 @@
           personalInfoForm?.get('phone')?.touched
         "
       >
-        Please enter a valid phone number
+        <app-error-message-input
+          errorMessage="Please enter a valid phone number"
+        ></app-error-message-input>
       </span>
     </div>
 
@@ -83,18 +92,11 @@
       <label for="email">Email</label>
       <input
         id="email"
+        type="email"
         formControlName="email"
         placeholder="Enter Email"
         class="text-input"
       />
-      <span
-        *ngIf="
-          personalInfoForm?.get('email')?.invalid &&
-          personalInfoForm?.get('email')?.touched
-        "
-      >
-        Please enter a valid email
-      </span>
     </div>
   </form>
 </section>
