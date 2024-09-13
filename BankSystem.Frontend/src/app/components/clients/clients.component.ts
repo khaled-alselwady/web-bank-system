@@ -4,6 +4,7 @@ import type { ClientView } from 'src/app/models/client/client-view.model';
 import { Subject, Subscription } from 'rxjs';
 import { ClientsDataService } from 'src/app/services/clients-data.service';
 import { take } from 'rxjs/operators';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-clients',
@@ -35,8 +36,12 @@ export class ClientsComponent implements OnInit, OnDestroy {
   ];
 
   subscriptions: Subscription[] = [];
+  isAddingMode = false;
 
-  constructor(private clientsDataService: ClientsDataService) {}
+  constructor(
+    private clientsDataService: ClientsDataService,
+    private activatedRoute: ActivatedRoute
+  ) {}
 
   private initialDataSubscription(
     event: { pageNumber: number; pageSize: number } = {
@@ -66,6 +71,12 @@ export class ClientsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.initialDataSubscription();
+
+    this.subscriptions.push(
+      this.activatedRoute.fragment.subscribe((fragment) => {
+        this.isAddingMode = !!fragment;
+      })
+    );
   }
 
   updateRow(element: ClientView) {

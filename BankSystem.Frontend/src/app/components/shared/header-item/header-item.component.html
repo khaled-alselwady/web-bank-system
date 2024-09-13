@@ -9,7 +9,7 @@
     {{ titleName }}
   </div>
   <div class="action">
-    <button *ngIf="buttonName">
+    <button (click)="onClick()" *ngIf="buttonName">
       <img src="../../../../assets/icons/add-white.png" alt="" />
       <div>{{ buttonName }}</div>
     </button>
