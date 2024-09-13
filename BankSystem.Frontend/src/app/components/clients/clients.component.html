@@ -18,8 +18,5 @@
     }"
   ></app-data-grid>
 
-  <app-paginator
-    [totalRecords$]="clientsCount$"
-    (change)="onChangePageNumber($event)"
-  ></app-paginator>
+  <app-paginator [totalRecords$]="clientsCount$"></app-paginator>
 </section>

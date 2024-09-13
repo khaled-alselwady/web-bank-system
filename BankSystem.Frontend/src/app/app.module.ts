@@ -26,6 +26,7 @@ import { DataGridComponent } from './components/shared/data-grid/data-grid.compo
 import { UsersComponent } from './components/users/users.component';
 import { StatueColorPipe } from './pipes/status-color.pipe';
 import { PaginatorComponent } from './components/shared/data-grid/paginator/paginator.component';
+import { ClientsDataService } from './services/clients-data.service';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,12 @@ import { PaginatorComponent } from './components/shared/data-grid/paginator/pagi
     NoopAnimationsModule,
     MatTableModule,
   ],
-  providers: [LoginScreenService, UsersService, ClientsService],
+  providers: [
+    LoginScreenService,
+    UsersService,
+    ClientsService,
+    ClientsDataService,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

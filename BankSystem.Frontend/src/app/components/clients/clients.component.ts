@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ClientsService } from 'src/app/services/clients.service';
 
 import type { ClientView } from 'src/app/models/client/client-view.model';
 import { Subject, Subscription } from 'rxjs';
+import { ClientsDataService } from 'src/app/services/clients-data.service';
 
 @Component({
   selector: 'app-clients',
@@ -35,37 +35,21 @@ export class ClientsComponent implements OnInit, OnDestroy {
 
   subscriptions: Subscription[] = [];
 
-  constructor(private clientsService: ClientsService) {}
+  constructor(private clientsDataService: ClientsDataService) {}
 
   ngOnDestroy(): void {
     this.subscriptions.forEach((sub) => sub.unsubscribe());
   }
 
-  private getCountClients() {
-    this.subscriptions.push(
-      this.clientsService.count().subscribe((count) => {
-        this.clientsCount$.next(count);
-      })
-    );
-  }
-
   ngOnInit(): void {
-    this.subscriptions.push(
-      this.clientsService.pagerClientsByPageNumber(1, 10).subscribe((data) => {
-        this.clientsData = data;
-        this.getCountClients();
-      })
-    );
-  }
+    this.clientsDataService.fetchData({ pageNumber: 1, pageSize: 10 });
 
-  onChangePageNumber(event: { pageNumber: number; pageSize: number }) {
-    this.subscriptions.push(
-      this.clientsService
-        .pagerClientsByPageNumber(event.pageNumber, event.pageSize)
-        .subscribe((data) => {
-          this.clientsData = data;
-        })
-    );
+    this.clientsDataService.allDataInPage$.subscribe((data) => {
+      this.clientsData = data;
+    });
+    this.clientsDataService.countClients$.subscribe((count) => {
+      this.clientsCount$.next(count);
+    });
   }
 
   updateRow(element: ClientView) {
