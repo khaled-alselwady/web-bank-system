@@ -106,7 +106,6 @@ export class DataGridComponent implements AfterViewChecked {
     if (this.filterText.trim() === '') {
       this.showAllData();
     } else {
-      // Filter based on the selected category and input text
       this.filteredData = this.dataSource.filter((item) => {
         const itemValue = item[categoryKey]?.toString().toLowerCase() || '';
         return itemValue.startsWith(this.filterText.toLowerCase());

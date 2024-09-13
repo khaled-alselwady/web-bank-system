@@ -30,6 +30,12 @@ export class ClientsService {
       .pipe(catchError(this.handleError));
   }
 
+  delete(id: number) {
+    return this.http
+      .delete(`${this.baseUrl}${id}`)
+      .pipe(catchError(this.handleError));
+  }
+
   // Error handling
   private handleError(error: HttpErrorResponse) {
     let errorMessage = 'Unknown error!';

@@ -1,5 +1,4 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { UsersService } from 'src/app/services/users.service';
 import type { UserView } from 'src/app/models/user/user-view.model';
 import { Subject, Subscription } from 'rxjs';
 import { UsersDataService } from 'src/app/services/users-data.service';

@@ -1,6 +1,10 @@
 <div class="filter-container">
   <!-- Filter by category dropdown -->
-  <select [(ngModel)]="selectedCategory" (change)="applyFilter()" (change)="checkGenderOrStatusSelected(selectedCategory)">
+  <select
+    [(ngModel)]="selectedCategory"
+    (change)="applyFilter()"
+    (change)="checkGenderOrStatusSelected(selectedCategory)"
+  >
     <option *ngFor="let category of categoriesForFiltering" [value]="category">
       {{ category }}
     </option>

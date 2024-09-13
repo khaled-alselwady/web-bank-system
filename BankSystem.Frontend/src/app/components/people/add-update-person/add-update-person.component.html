@@ -1,0 +1,100 @@
+<section class="form-section">
+  <h3>Personal Information</h3>
+
+  <form [formGroup]="personalInfoForm!" class="form-grid">
+    <div class="form-group">
+      <label for="firstName">First Name</label>
+      <input
+        id="firstName"
+        formControlName="firstName"
+        placeholder="Enter First Name"
+        class="text-input"
+      />
+      <span
+        *ngIf="
+          personalInfoForm?.get('firstName')?.invalid &&
+          personalInfoForm?.get('firstName')?.touched
+        "
+      >
+        First Name is required
+      </span>
+    </div>
+
+    <div class="form-group">
+      <label for="lastName">Last Name</label>
+      <input
+        id="lastName"
+        formControlName="lastName"
+        placeholder="Enter Last Name"
+        class="text-input"
+      />
+      <span
+        *ngIf="
+          personalInfoForm?.get('lastName')?.invalid &&
+          personalInfoForm?.get('lastName')?.touched
+        "
+      >
+        Last Name is required
+      </span>
+    </div>
+
+    <div class="form-group">
+      <label>Gender</label>
+      <div>
+        <input type="radio" id="male" formControlName="gender" value="Male" />
+        <label for="male">Male</label>
+        <input
+          type="radio"
+          id="female"
+          formControlName="gender"
+          value="Female"
+        />
+        <label for="female">Female</label>
+      </div>
+      <span
+        *ngIf="
+          personalInfoForm?.get('gender')?.invalid &&
+          personalInfoForm?.get('gender')?.touched
+        "
+      >
+        Gender is required
+      </span>
+    </div>
+
+    <div class="form-group">
+      <label for="phone">Phone</label>
+      <input
+        id="phone"
+        formControlName="phone"
+        placeholder="+1234567890"
+        class="text-input"
+      />
+      <span
+        *ngIf="
+          personalInfoForm?.get('phone')?.invalid &&
+          personalInfoForm?.get('phone')?.touched
+        "
+      >
+        Please enter a valid phone number
+      </span>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input
+        id="email"
+        formControlName="email"
+        placeholder="Enter Email"
+        class="text-input"
+      />
+      <span
+        *ngIf="
+          personalInfoForm?.get('email')?.invalid &&
+          personalInfoForm?.get('email')?.touched
+        "
+      >
+        Please enter a valid email
+      </span>
+    </div>
+  </form>
+</section>

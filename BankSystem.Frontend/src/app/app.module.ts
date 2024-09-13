@@ -1,14 +1,18 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from '@angular/material/table';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatOptionModule } from '@angular/material/core';
 
 import { LoginScreenService } from './services/login-screen.service';
-import { UsersService } from './services/users.service';
 import { ClientsService } from './services/clients.service';
+import { ClientsDataService } from './services/clients-data.service';
+import { UsersService } from './services/users.service';
+import { UsersDataService } from './services/users-data.service';
 
 import { AppComponent } from './app.component';
 import { ItemSidebarComponent } from './components/item-sidebar/item-sidebar.component';
@@ -23,8 +27,10 @@ import { ClientsComponent } from './components/clients/clients.component';
 import { HeaderItemComponent } from './components/shared/header-item/header-item.component';
 import { DataGridComponent } from './components/shared/data-grid/data-grid.component';
 import { UsersComponent } from './components/users/users.component';
-import { StatueColorPipe } from './pipes/status-color.pipe';
 import { PaginatorComponent } from './components/shared/data-grid/paginator/paginator.component';
+import { StatueColorPipe } from './pipes/status-color.pipe';
+import { AddUpdatePersonComponent } from './components/people/add-update-person/add-update-person.component';
+import { MatRadioModule } from '@angular/material/radio';
 
 @NgModule({
   declarations: [
@@ -43,6 +49,7 @@ import { PaginatorComponent } from './components/shared/data-grid/paginator/pagi
     StatueColorPipe,
     UsersComponent,
     PaginatorComponent,
+    AddUpdatePersonComponent,
   ],
   imports: [
     BrowserModule,
@@ -51,11 +58,17 @@ import { PaginatorComponent } from './components/shared/data-grid/paginator/pagi
     AppRoutingModule,
     NoopAnimationsModule,
     MatTableModule,
+    MatFormFieldModule,
+    MatOptionModule,
+    ReactiveFormsModule,
+    MatRadioModule
   ],
   providers: [
     LoginScreenService,
-    UsersService,
     ClientsService,
+    ClientsDataService,
+    UsersService,
+    UsersDataService,
   ],
   bootstrap: [AppComponent],
 })

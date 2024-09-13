@@ -7,7 +7,7 @@
     ></app-header-item>
   </div>
 
-  <app-data-grid
+  <!-- <app-data-grid
     [categoriesForFiltering]="catagoriesForFiltering"
     [displayedColumns]="displayedColumnsName"
     [dataSource$]="clientsData$"
@@ -17,5 +17,6 @@
     }"
   ></app-data-grid>
 
-  <app-paginator [totalRecords$]="clientsCount$" (changeData)="onChangeDataByPaginator($event)"></app-paginator>
+  <app-paginator [totalRecords$]="clientsCount$" (changeData)="onChangeDataByPaginator($event)"></app-paginator> -->
+  <app-add-update-person></app-add-update-person>
 </section>
