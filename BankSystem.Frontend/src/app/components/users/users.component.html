@@ -8,6 +8,7 @@
   </div>
 
   <app-data-grid
+    [categoriesForFiltering]="catagoriesForFiltering"
     [displayedColumns]="displayedColumnsName"
     [dataSource$]="usersData$"
     [actions]="{
@@ -16,5 +17,5 @@
     }"
   ></app-data-grid>
 
-  <app-paginator [totalRecords$]="usersCount$"></app-paginator>
+  <app-paginator [totalRecords$]="usersCount$" (changeData)="onChangeDataByPaginator($event)"></app-paginator>
 </section>

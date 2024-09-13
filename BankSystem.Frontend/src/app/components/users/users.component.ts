@@ -2,6 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { UsersService } from 'src/app/services/users.service';
 import type { UserView } from 'src/app/models/user/user-view.model';
 import { Subject, Subscription } from 'rxjs';
+import { UsersDataService } from 'src/app/services/users-data.service';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-users',
@@ -19,6 +21,15 @@ export class UsersComponent implements OnInit, OnDestroy {
     'Status',
     'Actions',
   ];
+  catagoriesForFiltering = [
+    'Id',
+    'Username',
+    'Full Name',
+    'Gender',
+    'Phone',
+    'Email',
+    'Status',
+  ];
 
   usersData: UserView[] = [];
   usersData$ = new Subject<UserView[]>();
@@ -26,37 +37,40 @@ export class UsersComponent implements OnInit, OnDestroy {
 
   subscriptions: Subscription[] = [];
 
-  constructor(private usersService: UsersService) {}
+  constructor(private usersServiceData: UsersDataService) {}
 
   ngOnInit(): void {
-    this.subscriptions.push(
-      this.usersService.pagerUsersByPageNumber(1, 10).subscribe((data) => {
-        this.usersData = data;
-        this.getCountUsers();
-      })
-    );
+    this.initialDataSubscription();
   }
 
   ngOnDestroy(): void {
     this.subscriptions.forEach((sub) => sub.unsubscribe());
   }
 
-  private getCountUsers() {
-    this.subscriptions.push(
-      this.usersService.count().subscribe((count) => {
+  private initialDataSubscription(
+    event: { pageNumber: number; pageSize: number } = {
+      pageNumber: 1,
+      pageSize: 10,
+    }
+  ) {
+    this.usersServiceData.fetchData(event);
+
+    const dataSub = this.usersServiceData.allDataInPage$
+      .pipe(take(1))
+      .subscribe((data) => {
+        this.usersData$.next(data);
+      });
+    const countSub = this.usersServiceData.countUsers$
+      .pipe(take(1))
+      .subscribe((count) => {
         this.usersCount$.next(count);
-      })
-    );
+      });
+
+    this.subscriptions.push(dataSub, countSub);
   }
 
-  onChangePageNumber(event: { pageNumber: number; pageSize: number }) {
-    this.subscriptions.push(
-      this.usersService
-        .pagerUsersByPageNumber(event.pageNumber, event.pageSize)
-        .subscribe((data) => {
-          this.usersData = data;
-        })
-    );
+  onChangeDataByPaginator(event: { pageNumber: number; pageSize: number }) {
+    this.initialDataSubscription(event);
   }
 
   updateRow(element: UserView) {
