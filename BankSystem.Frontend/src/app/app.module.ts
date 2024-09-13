@@ -5,8 +5,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from '@angular/material/table';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatOptionModule } from '@angular/material/core';
 
 import { LoginScreenService } from './services/login-screen.service';
 import { ClientsService } from './services/clients.service';
@@ -28,10 +26,10 @@ import { HeaderItemComponent } from './components/shared/header-item/header-item
 import { DataGridComponent } from './components/shared/data-grid/data-grid.component';
 import { UsersComponent } from './components/users/users.component';
 import { PaginatorComponent } from './components/shared/data-grid/paginator/paginator.component';
-import { StatueColorPipe } from './pipes/status-color.pipe';
-import { AddUpdatePersonComponent } from './components/people/add-update-person/add-update-person.component';
-import { MatRadioModule } from '@angular/material/radio';
+import { AddEditPersonComponent } from './components/people/add-edit-person/add-edit-person.component';
 import { ErrorMessageInputComponent } from './components/shared/error-message-input/error-message-input.component';
+import { StatueColorPipe } from './pipes/status-color.pipe';
+import { AddEditClientComponent } from './components/clients/add-edit-client/add-edit-client.component';
 
 @NgModule({
   declarations: [
@@ -50,8 +48,9 @@ import { ErrorMessageInputComponent } from './components/shared/error-message-in
     StatueColorPipe,
     UsersComponent,
     PaginatorComponent,
-    AddUpdatePersonComponent,
+    AddEditPersonComponent,
     ErrorMessageInputComponent,
+    AddEditClientComponent,
   ],
   imports: [
     BrowserModule,
@@ -60,10 +59,7 @@ import { ErrorMessageInputComponent } from './components/shared/error-message-in
     AppRoutingModule,
     NoopAnimationsModule,
     MatTableModule,
-    MatFormFieldModule,
-    MatOptionModule,
     ReactiveFormsModule,
-    MatRadioModule
   ],
   providers: [
     LoginScreenService,

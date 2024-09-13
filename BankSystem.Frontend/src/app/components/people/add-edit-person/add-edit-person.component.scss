@@ -35,6 +35,15 @@ $success-color: #4caf50;
       flex-direction: column;
       gap: 0.5rem;
 
+      .male-label {
+        margin-right: 0.7rem;
+      }
+
+      .male-label,
+      .female-label {
+        color: black;
+      }
+
       label {
         font-size: 1rem;
         color: $highlight-color;

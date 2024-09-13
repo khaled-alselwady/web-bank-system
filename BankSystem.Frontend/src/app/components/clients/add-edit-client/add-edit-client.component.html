@@ -1,0 +1,89 @@
+<section class="form-section">
+  <h3>Client Information</h3>
+
+  <form [formGroup]="clientInfoForm" class="form-grid">
+    <div class="form-group">
+      <label for="accountNumber">Account Number</label>
+      <input
+        id="accountNumber"
+        formControlName="accountNumber"
+        placeholder="Enter Account Number"
+        class="text-input"
+      />
+      <span
+        *ngIf="
+          clientInfoForm?.get('accountNumber')?.invalid &&
+          clientInfoForm?.get('accountNumber')?.touched
+        "
+      >
+        <app-error-message-input
+          errorMessage="Account Number is required"
+        ></app-error-message-input>
+      </span>
+    </div>
+
+    <div class="form-group">
+      <label for="pinCode">PIN Code</label>
+      <input
+        id="pinCode"
+        type="password"
+        formControlName="pinCode"
+        placeholder="Enter PIN Code"
+        class="text-input"
+      />
+      <span
+        *ngIf="
+          clientInfoForm?.get('pinCode')?.invalid &&
+          clientInfoForm?.get('pinCode')?.touched
+        "
+      >
+        <app-error-message-input
+          errorMessage="PIN Code is required"
+        ></app-error-message-input>
+      </span>
+    </div>
+
+    <div class="form-group">
+      <label for="balance">Balance</label>
+      <input
+        id="balance"
+        type="number"
+        formControlName="balance"
+        placeholder="Enter Balance"
+        class="text-input"
+      />
+      <span
+        *ngIf="
+          clientInfoForm?.get('balance')?.invalid &&
+          clientInfoForm?.get('balance')?.touched
+        "
+      >
+        <app-error-message-input
+          errorMessage="Balance is required"
+        ></app-error-message-input>
+      </span>
+    </div>
+
+    <div class="form-group">
+      <label for="isActive">Active Status</label>
+      <div class="active-checkbox">
+        <input id="isActive" type="checkbox" formControlName="isActive" />
+        <span
+          [ngStyle]="{
+            color: clientInfoForm.get('isActive')?.value
+              ? 'rgb(0, 215, 86)'
+              : 'rgb(215, 0, 0)'
+          }"
+        >
+          {{ clientInfoForm.get("isActive")?.value ? "Active" : "Inactive" }}
+        </span>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button class="cancel-button" (click)="onCancel()">Cancel</button>
+      <button type="reset">Reset</button>
+      <button type="submit" [disabled]="clientInfoForm.invalid">Save</button>
+    </div>
+  </form>
+</section>

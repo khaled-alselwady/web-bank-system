@@ -43,31 +43,6 @@
     </div>
 
     <div class="form-group">
-      <label>Gender</label>
-      <div>
-        <input type="radio" id="male" formControlName="gender" value="Male" />
-        <label for="male">Male</label>
-        <input
-          type="radio"
-          id="female"
-          formControlName="gender"
-          value="Female"
-        />
-        <label for="female">Female</label>
-      </div>
-      <span
-        *ngIf="
-          personalInfoForm?.get('gender')?.invalid &&
-          personalInfoForm?.get('gender')?.touched
-        "
-      >
-        <app-error-message-input
-          errorMessage="Gender is required"
-        ></app-error-message-input>
-      </span>
-    </div>
-
-    <div class="form-group">
       <label for="phone">Phone</label>
       <input
         id="phone"
@@ -97,6 +72,31 @@
         placeholder="Enter Email"
         class="text-input"
       />
+    </div>
+
+    <div class="form-group">
+      <label>Gender</label>
+      <div>
+        <input type="radio" id="male" formControlName="gender" value="Male" />
+        <label for="male" class="male-label">Male</label>
+        <input
+          type="radio"
+          id="female"
+          formControlName="gender"
+          value="Female"
+        />
+        <label for="female" class="female-label">Female</label>
+      </div>
+      <span
+        *ngIf="
+          personalInfoForm?.get('gender')?.invalid &&
+          personalInfoForm?.get('gender')?.touched
+        "
+      >
+        <app-error-message-input
+          errorMessage="Gender is required"
+        ></app-error-message-input>
+      </span>
     </div>
   </form>
 </section>
