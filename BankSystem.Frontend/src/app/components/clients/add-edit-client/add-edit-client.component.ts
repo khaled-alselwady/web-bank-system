@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ClientsDataService } from 'src/app/services/clients-data.service';
 import { FormService } from 'src/app/services/form.service';
 
 @Component({
@@ -8,12 +10,15 @@ import { FormService } from 'src/app/services/form.service';
   styleUrls: ['./add-edit-client.component.scss'],
 })
 export class AddEditClientComponent implements OnInit {
-  onCancel() {
-    throw new Error('Method not implemented.');
-  }
   clientInfoForm!: FormGroup;
 
-  constructor(private fb: FormBuilder, private formService: FormService) {}
+  constructor(
+    private fb: FormBuilder,
+    private formService: FormService,
+    private clientsDataService: ClientsDataService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.clientInfoForm = this.fb.group({
@@ -36,5 +41,11 @@ export class AddEditClientComponent implements OnInit {
 
   onReset() {
     this.formService.resetFields.next();
+  }
+
+  onCancel() {
+    //this.formService.cancel();
+    this.clientsDataService.fetchData({ pageNumber: 1, pageSize: 10 });
+    this.router.navigate(['../'], { relativeTo: this.activatedRoute });
   }
 }

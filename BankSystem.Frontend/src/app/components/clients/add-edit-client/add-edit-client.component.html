@@ -83,7 +83,9 @@
     </div>
 
     <div class="actions">
-      <button class="cancel-button" (click)="onCancel()">Cancel</button>
+      <button [routerLink]="['../']" class="cancel-button" (click)="onCancel()">
+        Cancel
+      </button>
       <button type="reset" (click)="onReset()">Reset</button>
       <button type="submit" [disabled]="clientInfoForm.invalid">Save</button>
     </div>
