@@ -8,6 +8,7 @@ import { take } from 'rxjs/operators';
 export class ClientsDataService {
   allDataInPage$ = new Subject<ClientView[]>();
   countClients$ = new Subject<number>();
+  refreshClients$ = new Subject<void>();
 
   constructor(private clientsService: ClientsService) {}
 

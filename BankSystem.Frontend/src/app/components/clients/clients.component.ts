@@ -1,4 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  AfterContentInit,
+  AfterViewChecked,
+  Component,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 
 import type { ClientView } from 'src/app/models/client/client-view.model';
 import { Subject, Subscription } from 'rxjs';
@@ -75,6 +81,12 @@ export class ClientsComponent implements OnInit, OnDestroy {
     this.subscriptions.push(
       this.activatedRoute.fragment.subscribe((fragment) => {
         this.isAddingMode = !!fragment;
+      })
+    );
+
+    this.subscriptions.push(
+      this.clientsDataService.refreshClients$.subscribe(() => {
+        this.initialDataSubscription();
       })
     );
   }

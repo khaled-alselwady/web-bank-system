@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import type { Item } from '../../components/item-sidebar/item-model';
 
 @Component({
@@ -62,8 +62,6 @@ export class MainItemsSidebarComponent {
   }
 
   getUpdatedItem(item: Item, index: number) {
-    console.log(item);
-    console.log(index);
     return {
       ...item,
       image: {

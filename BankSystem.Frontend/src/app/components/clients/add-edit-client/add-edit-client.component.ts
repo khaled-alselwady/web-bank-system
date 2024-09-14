@@ -44,8 +44,7 @@ export class AddEditClientComponent implements OnInit {
   }
 
   onCancel() {
-    //this.formService.cancel();
-    this.clientsDataService.fetchData({ pageNumber: 1, pageSize: 10 });
+    this.clientsDataService.refreshClients$.next(); // raise the event to call subscribers
     this.router.navigate(['../'], { relativeTo: this.activatedRoute });
   }
 }
