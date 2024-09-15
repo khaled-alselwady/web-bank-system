@@ -1,8 +1,6 @@
-export interface Person {
-  id: number;
+export interface AddEditPerson {
   firstName: string;
   lastName: string;
-  fullName: string;
   gender: string;
   phone: string;
   email?: string;

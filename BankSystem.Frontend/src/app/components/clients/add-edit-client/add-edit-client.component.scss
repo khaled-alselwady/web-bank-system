@@ -101,7 +101,8 @@ $success-color: #4caf50;
       padding: 0.6rem 1.8rem;
       border-radius: 5px;
       border: 1px solid transparent;
-      transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease,
+        transform 0.2s ease;
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
       font-weight: 500;
 
@@ -123,7 +124,8 @@ $success-color: #4caf50;
       padding: 0.6rem 1.8rem;
       border-radius: 5px;
       border: 1px solid transparent;
-      transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease,
+        transform 0.2s ease;
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
       font-weight: 500;
 
@@ -145,7 +147,8 @@ $success-color: #4caf50;
       padding: 0.6rem 1.8rem;
       border: 1px solid $highlight-color;
       border-radius: 5px;
-      transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+      transition: background-color 0.3s ease, color 0.3s ease,
+        transform 0.2s ease;
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
       font-weight: 500;
 
@@ -161,11 +164,15 @@ $success-color: #4caf50;
         box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
       }
     }
-
   }
   .actions {
     grid-column: 3 / 2;
     justify-self: end;
+
+    .disabled-submit-button {
+      background-color: #6d6d6d !important;
+      pointer-events: none;
+    }
   }
   // Responsive design
   @media (max-width: 600px) {

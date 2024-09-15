@@ -41,7 +41,6 @@ export class DataGridComponent implements AfterViewChecked {
 
   ngOnInit() {
     this.dataSource$.pipe(take(1)).subscribe((data) => {
-      console.log(data);
       this.dataSource = [...data];
       this.filteredData = [...data];
     });

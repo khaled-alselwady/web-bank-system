@@ -30,8 +30,4 @@ export class ClientsDataService {
         this.getCountClients();
       });
   }
-
-  delete(id: number) {
-    this.clientsService.delete(id).subscribe();
-  }
 }

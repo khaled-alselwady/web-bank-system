@@ -1,9 +1,11 @@
-<app-add-edit-person></app-add-edit-person>
+<app-add-edit-person
+  (valid)="onPersonFormStatusChanged($event)"
+></app-add-edit-person>
 
 <section class="form-section">
   <h3>Client Information</h3>
 
-  <form [formGroup]="clientInfoForm" class="form-grid">
+  <form [formGroup]="clientInfoForm" class="form-grid" (ngSubmit)="onSubmit()">
     <div class="form-group">
       <label for="accountNumber">Account Number</label>
       <input
@@ -85,7 +87,14 @@
     <div class="actions">
       <button class="cancel-button" (click)="onCancel()">Cancel</button>
       <button type="reset" (click)="onReset()">Reset</button>
-      <button type="submit" [disabled]="clientInfoForm.invalid">Save</button>
+      <button
+        type="submit"
+        [ngClass]="{
+          'disabled-submit-button': clientInfoForm.invalid || !isPersonFormValid
+        }"
+      >
+        Save
+      </button>
     </div>
   </form>
 </section>

@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { ClientView } from '../models/client/client-view.model';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { AddEditClient } from '../models/client/add-edit-client.model';
+import { Client } from '../models/client/client.model';
 
 @Injectable({ providedIn: 'root' })
 export class ClientsService {
@@ -27,6 +29,12 @@ export class ClientsService {
       .get<ClientView[]>(
         `${this.baseUrl}pageUsingPageNumber/${pageNumber}/${pageSize}`
       )
+      .pipe(catchError(this.handleError));
+  }
+
+  add(clientData: AddEditClient) {
+    return this.http
+      .post<Client>(`${this.baseUrl}`, clientData)
       .pipe(catchError(this.handleError));
   }
 

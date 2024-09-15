@@ -11,6 +11,7 @@ import { FormService } from 'src/app/services/form.service';
 })
 export class AddEditClientComponent implements OnInit {
   clientInfoForm!: FormGroup;
+  isPersonFormValid = false;
 
   constructor(
     private fb: FormBuilder,
@@ -46,5 +47,10 @@ export class AddEditClientComponent implements OnInit {
   onCancel() {
     this.clientsDataService.refreshClients$.next(); // raise the event to call subscribers
     this.router.navigate(['../'], { relativeTo: this.activatedRoute });
+  }
+
+  onPersonFormStatusChanged(event: boolean) {
+    console.log(event);
+    this.isPersonFormValid = event;
   }
 }
