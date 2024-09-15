@@ -12,6 +12,7 @@ import { FormService } from 'src/app/services/form.service';
 export class AddEditClientComponent implements OnInit {
   clientInfoForm!: FormGroup;
   isPersonFormValid = false;
+  personInfo: any;
 
   constructor(
     private fb: FormBuilder,
@@ -34,6 +35,7 @@ export class AddEditClientComponent implements OnInit {
   onSubmit(): void {
     if (this.clientInfoForm.valid) {
       console.log(this.clientInfoForm.value);
+      console.log(this.personInfo);
       // Perform further actions such as API calls, etc.
     } else {
       this.clientInfoForm.markAllAsTouched(); // This will trigger validation messages
@@ -49,8 +51,8 @@ export class AddEditClientComponent implements OnInit {
     this.router.navigate(['../'], { relativeTo: this.activatedRoute });
   }
 
-  onPersonFormStatusChanged(event: boolean) {
-    console.log(event);
-    this.isPersonFormValid = event;
+  onPersonFormStatusChanged(event: { isValid: boolean; personInfo: any }) {
+    this.isPersonFormValid = event.isValid;
+    this.personInfo = event.personInfo;
   }
 }

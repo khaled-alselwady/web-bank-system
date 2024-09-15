@@ -19,7 +19,7 @@ export class AddEditPersonComponent implements OnInit, OnDestroy {
   personalInfoForm?: FormGroup;
   resetSub?: Subscription;
   validSub?: Subscription;
-  @Output() valid = new EventEmitter<boolean>();
+  @Output() valid = new EventEmitter<{ isValid: boolean; personInfo: any }>();
 
   constructor(private fb: FormBuilder, private formService: FormService) {}
 
@@ -34,9 +34,15 @@ export class AddEditPersonComponent implements OnInit, OnDestroy {
 
     this.validSub = this.personalInfoForm.statusChanges.subscribe((status) => {
       if (status === 'VALID') {
-        this.valid.emit(true);
+        this.valid.emit({
+          isValid: true,
+          personInfo: this.personalInfoForm?.value,
+        });
       } else {
-        this.valid.emit(false);
+        this.valid.emit({
+          isValid: false,
+          personInfo: this.personalInfoForm?.value,
+        });
       }
     });
 
