@@ -17,8 +17,7 @@ import { FormService } from 'src/app/services/form.service';
 })
 export class AddEditPersonComponent implements OnInit, OnDestroy {
   personalInfoForm?: FormGroup;
-  resetSub?: Subscription;
-  validSub?: Subscription;
+  private subscription?: Subscription[] = [];
   @Output() valid = new EventEmitter<{ isValid: boolean; personInfo: any }>();
 
   constructor(private fb: FormBuilder, private formService: FormService) {}
@@ -32,7 +31,19 @@ export class AddEditPersonComponent implements OnInit, OnDestroy {
       email: ['', [Validators.email]],
     });
 
-    this.validSub = this.personalInfoForm.statusChanges.subscribe((status) => {
+    this.subscription?.push(this.subToCheckPersonFormStatus());
+
+    this.subscription?.push(this.subToFillFields());
+
+    this.subscription?.push(this.subToResetFields());
+  }
+
+  ngOnDestroy(): void {
+    this.subscription?.forEach((sub) => sub.unsubscribe());
+  }
+
+  private subToCheckPersonFormStatus() {
+    return this.personalInfoForm!.statusChanges.subscribe((status) => {
       if (status === 'VALID') {
         this.valid.emit({
           isValid: true,
@@ -45,16 +56,19 @@ export class AddEditPersonComponent implements OnInit, OnDestroy {
         });
       }
     });
+  }
 
-    this.resetSub = this.formService.resetFields.pipe(take(1)).subscribe({
+  private subToFillFields() {
+    return this.formService.fillPersonData.subscribe((data) => {
+      this.personalInfoForm?.patchValue(data);
+    });
+  }
+
+  private subToResetFields() {
+    return this.formService.resetFields.pipe(take(1)).subscribe({
       next: () => {
         this.personalInfoForm?.reset();
       },
     });
-  }
-
-  ngOnDestroy(): void {
-    this.resetSub?.unsubscribe();
-    this.validSub?.unsubscribe();
   }
 }

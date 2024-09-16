@@ -49,7 +49,7 @@ export class AddEditClientComponent implements OnInit {
           const clientId = params['clientId'];
           this.clientsService.findByClientId(clientId).subscribe((client) => {
             this.clientInfoForm.patchValue(client);
-            this.personInfo = client.person;
+            this.formService.fillPersonData.next(client.person);
           });
         },
       });
