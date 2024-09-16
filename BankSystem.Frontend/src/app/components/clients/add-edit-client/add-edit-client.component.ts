@@ -1,13 +1,12 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormMode } from 'src/app/enums/form-mode.enum';
-import { AddEditClient } from 'src/app/models/client/add-edit-client.model';
 import { ClientsDataService } from 'src/app/services/clients-data.service';
 import { ClientsService } from 'src/app/services/clients.service';
 import { FormService } from 'src/app/services/form.service';
 import { AlertComponent } from '../../shared/alert/alert.component';
 import { HeaderItemService } from 'src/app/services/header-item.service';
+import { ClientRepository } from 'src/app/repositories/client-repository';
 
 @Component({
   selector: 'app-add-edit-client',
@@ -19,8 +18,11 @@ export class AddEditClientComponent implements OnInit, OnDestroy {
   isPersonFormValid = false;
   personInfo: any;
   clientId?: number;
-  private formMode: FormMode = FormMode.ADD;
   @ViewChild(AlertComponent) alertComponent!: AlertComponent;
+
+  clientRepository: ClientRepository = new ClientRepository(
+    this.clientsService
+  );
 
   constructor(
     private fb: FormBuilder,
@@ -43,76 +45,59 @@ export class AddEditClientComponent implements OnInit, OnDestroy {
       isActive: [true],
     });
 
-    this.activatedRoute.fragment.subscribe((fragment) => {
-      if (fragment === 'adding') {
-        this.formMode = FormMode.ADD;
-        this.headerItemService.headerItemName.next('Add New Client');
-      } else {
-        this.formMode = FormMode.EDIT;
-        this.headerItemService.headerItemName.next('Update New Client');
-      }
+    this.activatedRoute.params.subscribe({
+      next: (params) => {
+        this.clientId = params['clientId'];
+        this.fillClientFields();
+      },
     });
 
-    if (this.formMode === FormMode.EDIT) {
-      this.activatedRoute.params.subscribe({
-        next: (params) => {
-          this.clientId = params['clientId'];
-          if (!this.clientId) {
-            return;
-          }
-          this.clientsService
-            .findByClientId(this.clientId)
-            .subscribe((client) => {
-              this.clientInfoForm.patchValue(client);
-              this.formService.fillPersonData.next(client.person);
-            });
-        },
-      });
+    this.activatedRoute.fragment.subscribe((fragment) => {
+      if (fragment === 'adding') {
+        this.headerItemService.headerItemName.next('Add New Client');
+        this.clientRepository = new ClientRepository(this.clientsService);
+      } else {
+        this.headerItemService.headerItemName.next('Update New Client');
+        this.clientRepository.findByClientId(this.clientId!).subscribe();
+      }
+    });
+  }
+
+  private fillClientFields() {
+    if (!this.clientId) {
+      return;
     }
+    this.clientRepository.findByClientId(this.clientId).subscribe((client) => {
+      this.clientInfoForm.patchValue(client);
+      this.formService.fillPersonData.next(client.person);
+    });
   }
 
   // You can create a method to handle form submission
   onSubmit(): void {
     if (this.clientInfoForm.valid && this.isPersonFormValid) {
-      const clientData: AddEditClient = {
+      this.clientRepository.clientDataForAddAndUpdate = {
         accountNumber: this.clientInfoForm.value.accountNumber,
         pinCode: this.clientInfoForm.value.pinCode,
         balance: this.clientInfoForm.value.balance,
         isActive: this.clientInfoForm.value.isActive,
         person: this.personInfo,
       };
-      if (this.formMode === FormMode.ADD) {
-        this.clientsService.add(clientData).subscribe(
-          () => {
-            this.alertComponent?.show('Client saved successfully', 'success');
-            this.headerItemService.headerItemName.next('Update New Client');
-            this.formMode = FormMode.EDIT;
-          },
-          (err) => {
-            this.alertComponent?.show('Failed to add client.', 'error');
-          }
-        );
-      } else {
-        if (!this.clientId) {
-          return;
-        }
-        this.clientsService.update(this.clientId, clientData).subscribe(
-          () => {
-            this.alertComponent?.show('Client updated successfully', 'success');
-          },
-          (err) => {
-            this.alertComponent?.show('Failed to update client.', 'error');
-          }
-        );
-        // this.router.navigate(['../'], { relativeTo: this.activatedRoute }); // Navigate back to the clients list page after updating a client. If you want to keep the same page, you can use `this.router.navigate(['..', client.id], { relativeTo: this.activatedRoute });` instead.
-      }
-    } else {
-      this.alertComponent?.show(
-        'Please fill out all required fields.',
-        'error'
-      );
-      this.clientInfoForm.markAllAsTouched(); // This will trigger validation messages
+
+      this.saveClient();
     }
+  }
+
+  private saveClient() {
+    this.clientRepository.save().subscribe(
+      (result) => {
+        this.alertComponent?.show('Client saved successfully', 'success');
+        this.headerItemService.headerItemName.next('Update New Client');
+      },
+      (err) => {
+        this.alertComponent?.show('Failed to save client.', 'error');
+      }
+    );
   }
 
   onReset() {
