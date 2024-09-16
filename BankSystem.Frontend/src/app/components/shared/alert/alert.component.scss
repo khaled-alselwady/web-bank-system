@@ -1,0 +1,28 @@
+.notification {
+  padding: 1rem 1.5rem;
+  border-radius: 5px;
+  font-size: 1rem;
+  color: #fff;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+  transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+
+  &.success {
+    background-color: #4caf50; // Green for success
+  }
+
+  &.error {
+    background-color: #f44336; // Red for error
+  }
+
+  // Show the notification when isVisible is true
+  &.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+}
