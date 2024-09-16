@@ -12,10 +12,7 @@
     [categoriesForFiltering]="catagoriesForFiltering"
     [displayedColumns]="displayedColumnsName"
     [dataSource$]="clientsData$"
-    [actions]="{
-      update: updateRow,
-      remove: removeRow
-    }"
+    [actions]="actions"
   ></app-data-grid>
 
   <app-paginator

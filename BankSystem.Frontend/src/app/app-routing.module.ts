@@ -17,6 +17,10 @@ const appRoutes: Routes = [
         path: 'new',
         component: AddEditClientComponent,
       },
+      {
+        path: ':clientId',
+        component: AddEditClientComponent,
+      },
     ],
   },
   { path: 'users', component: UsersComponent },

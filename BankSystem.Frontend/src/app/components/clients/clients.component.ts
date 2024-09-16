@@ -1,16 +1,10 @@
-import {
-  AfterContentInit,
-  AfterViewChecked,
-  Component,
-  OnDestroy,
-  OnInit,
-} from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 
 import type { ClientView } from 'src/app/models/client/client-view.model';
 import { Subject, Subscription } from 'rxjs';
 import { ClientsDataService } from 'src/app/services/clients-data.service';
 import { take } from 'rxjs/operators';
-import { ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-clients',
@@ -40,12 +34,17 @@ export class ClientsComponent implements OnInit, OnDestroy {
     'Email',
     'Status',
   ];
+  actions = {
+    update: (element: ClientView) => this.updateRow(element),
+    remove: (element: ClientView) => this.removeRow(element),
+  };
 
   subscriptions: Subscription[] = [];
   isAddingMode = false;
 
   constructor(
     private clientsDataService: ClientsDataService,
+    private router: Router,
     private activatedRoute: ActivatedRoute
   ) {}
 
@@ -92,12 +91,23 @@ export class ClientsComponent implements OnInit, OnDestroy {
   }
 
   updateRow(element: ClientView) {
-    console.log(element);
+    this.router.navigate([element.id], {
+      relativeTo: this.activatedRoute,
+      fragment: 'editing',
+    });
   }
 
   removeRow(element: ClientView) {
     console.log(element);
   }
+
+  // getUpdateAction() {
+  //   return (element: ClientView) => this.updateRow(element);
+  // }
+
+  // getRemoveAction() {
+  //   return (element: ClientView) => this.removeRow(element);
+  // }
 
   onChangeDataByPaginator(event: { pageNumber: number; pageSize: number }) {
     this.initialDataSubscription(event);

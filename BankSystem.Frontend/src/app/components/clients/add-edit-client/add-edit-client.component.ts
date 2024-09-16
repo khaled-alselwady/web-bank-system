@@ -44,7 +44,9 @@ export class AddEditClientComponent implements OnInit {
         isActive: this.clientInfoForm.value.isActive,
         person: this.personInfo,
       };
-      this.clientsService.add(clientData).subscribe((newClient) => {});
+      this.clientsService.add(clientData).subscribe((newClient) => {
+        this.onCancel();
+      });
     } else {
       this.clientInfoForm.markAllAsTouched(); // This will trigger validation messages
     }
