@@ -8,7 +8,6 @@ import { MatTableModule } from '@angular/material/table';
 
 import { LoginScreenService } from './services/login-screen.service';
 import { ClientsService } from './services/clients.service';
-import { ClientsDataService } from './services/clients-data.service';
 import { UsersService } from './services/users.service';
 import { UsersDataService } from './services/users-data.service';
 import { FormService } from './services/form.service';
@@ -70,7 +69,6 @@ import { AddEditUserComponent } from './components/users/add-edit-user/add-edit-
   providers: [
     LoginScreenService,
     ClientsService,
-    ClientsDataService,
     UsersService,
     UsersDataService,
     FormService,

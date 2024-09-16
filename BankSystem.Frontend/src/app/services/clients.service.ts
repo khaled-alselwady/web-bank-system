@@ -2,14 +2,18 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { ClientView } from '../models/client/client-view.model';
-import { throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { Subject, throwError } from 'rxjs';
+import { catchError, take } from 'rxjs/operators';
 import { AddEditClient } from '../models/client/add-edit-client.model';
 import { Client } from '../models/client/client.model';
 
 @Injectable({ providedIn: 'root' })
 export class ClientsService {
   private baseUrl = 'http://localhost:5006/api/clients/';
+  allDataInPage$ = new Subject<ClientView[]>();
+  countClients$ = new Subject<number>();
+  refreshClients$ = new Subject<void>();
+
   constructor(private http: HttpClient, private router: Router) {}
 
   fetchAll() {
@@ -66,5 +70,22 @@ export class ClientsService {
 
     errorMessage = error.error.message;
     return throwError(errorMessage);
+  }
+
+  private getCountClients() {
+    this.count()
+      .pipe(take(1))
+      .subscribe((count) => {
+        this.countClients$.next(count);
+      });
+  }
+
+  fetchData(pageData: { pageNumber: number; pageSize: number }) {
+    this.pagerClientsByPageNumber(pageData.pageNumber, pageData.pageSize)
+      .pipe(take(1))
+      .subscribe((data) => {
+        this.allDataInPage$.next(data);
+        this.getCountClients();
+      });
   }
 }

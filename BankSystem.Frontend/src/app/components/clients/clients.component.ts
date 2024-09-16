@@ -2,9 +2,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 
 import type { ClientView } from 'src/app/models/client/client-view.model';
 import { Subject, Subscription } from 'rxjs';
-import { ClientsDataService } from 'src/app/services/clients-data.service';
 import { take } from 'rxjs/operators';
 import { Router, ActivatedRoute } from '@angular/router';
+import { ClientsService } from 'src/app/services/clients.service';
 
 @Component({
   selector: 'app-clients',
@@ -43,7 +43,7 @@ export class ClientsComponent implements OnInit, OnDestroy {
   isAddingMode = false;
 
   constructor(
-    private clientsDataService: ClientsDataService,
+    private clientsService: ClientsService,
     private router: Router,
     private activatedRoute: ActivatedRoute
   ) {}
@@ -54,14 +54,14 @@ export class ClientsComponent implements OnInit, OnDestroy {
       pageSize: 10,
     }
   ) {
-    this.clientsDataService.fetchData(event);
+    this.clientsService.fetchData(event);
 
-    const dataSub = this.clientsDataService.allDataInPage$
+    const dataSub = this.clientsService.allDataInPage$
       .pipe(take(1))
       .subscribe((data) => {
         this.clientsData$.next(data);
       });
-    const countSub = this.clientsDataService.countClients$
+    const countSub = this.clientsService.countClients$
       .pipe(take(1))
       .subscribe((count) => {
         this.clientsCount$.next(count);
@@ -84,7 +84,7 @@ export class ClientsComponent implements OnInit, OnDestroy {
     );
 
     this.subscriptions.push(
-      this.clientsDataService.refreshClients$.subscribe(() => {
+      this.clientsService.refreshClients$.subscribe(() => {
         this.initialDataSubscription();
       })
     );

@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ClientsDataService } from 'src/app/services/clients-data.service';
 import { ClientsService } from 'src/app/services/clients.service';
 import { FormService } from 'src/app/services/form.service';
 import { AlertComponent } from '../../shared/alert/alert.component';
@@ -27,7 +26,6 @@ export class AddEditClientComponent implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
     private formService: FormService,
-    private clientsDataService: ClientsDataService,
     private clientsService: ClientsService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
@@ -105,7 +103,7 @@ export class AddEditClientComponent implements OnInit, OnDestroy {
   }
 
   onCancel() {
-    this.clientsDataService.refreshClients$.next(); // raise the event to call subscribers
+    this.clientsService.refreshClients$.next(); // raise the event to call subscribers
     this.router.navigate(['../'], { relativeTo: this.activatedRoute });
   }
 
