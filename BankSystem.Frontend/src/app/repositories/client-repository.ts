@@ -69,10 +69,13 @@ export class ClientRepository {
 
   save() {
     switch (this.mode) {
-      case FormMode.ADD:
+      case FormMode.ADD: {
+        this.mode = FormMode.EDIT;
         return this.add();
-      case FormMode.EDIT:
+      }
+      case FormMode.EDIT: {
         return this.update();
+      }
     }
   }
 
