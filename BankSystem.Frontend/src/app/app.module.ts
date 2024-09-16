@@ -32,6 +32,7 @@ import { StatueColorPipe } from './pipes/status-color.pipe';
 import { AlertComponent } from './components/shared/alert/alert.component';
 import { HeaderItemService } from './services/header-item.service';
 import { AddEditUserComponent } from './components/users/add-edit-user/add-edit-user.component';
+import { PermissionsService } from './services/permissions.service';
 
 @NgModule({
   declarations: [
@@ -71,6 +72,7 @@ import { AddEditUserComponent } from './components/users/add-edit-user/add-edit-
     UsersService,
     FormService,
     HeaderItemService,
+    PermissionsService,
   ],
   bootstrap: [AppComponent],
 })

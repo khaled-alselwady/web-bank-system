@@ -143,4 +143,8 @@ export class AddEditUserComponent implements OnInit {
       });
     }
   }
+
+  selectCorrectPermissions(permissions: number) {
+    
+  }
 }
