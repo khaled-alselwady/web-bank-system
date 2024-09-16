@@ -1,22 +1,22 @@
 import { Observable, of } from 'rxjs';
 import { FormMode } from '../enums/form-mode.enum';
-import { AddEditClient } from '../models/client/add-edit-client.model';
-import { Client } from '../models/client/client.model';
-import { ClientsService } from '../services/clients.service';
 import { catchError, map } from 'rxjs/operators';
+import { User } from '../models/user/user.model';
+import { AddEditUser } from '../models/user/add-edit-user.model';
+import { UsersService } from '../services/users.service';
 
 export class UserRepository {
   mode: FormMode = FormMode.ADD;
-  clientData: Client;
-  clientDataForAddAndUpdate!: AddEditClient;
+  userData: User;
+  userDataForAddAndUpdate!: AddEditUser;
 
-  constructor(private clientsService: ClientsService) {
+  constructor(private usersService: UsersService) {
     this.mode = FormMode.ADD;
-    this.clientData = {
+    this.userData = {
       id: 0,
-      accountNumber: '',
-      pinCode: '',
-      balance: 0,
+      username: '',
+      password: '',
+      permissions: 0,
       isActive: true,
       person: {
         id: 0,
@@ -31,38 +31,38 @@ export class UserRepository {
   }
 
   add(): Observable<boolean> {
-    return this.clientsService.add(this.clientDataForAddAndUpdate).pipe(
-      map((newClient) => {
-        this.clientData = newClient;
+    return this.usersService.add(this.userDataForAddAndUpdate).pipe(
+      map((newUser) => {
+        this.userData = newUser;
         return true; // Return true on success
       }),
       catchError((error) => {
-        console.error('Error adding client:', error);
+        console.error('Error adding user:', error);
         return of(false); // Return false on error
       })
     );
   }
 
   private update() {
-    return this.clientsService
-      .update(this.clientData.id, this.clientDataForAddAndUpdate)
+    return this.usersService
+      .update(this.userData.id, this.userDataForAddAndUpdate)
       .pipe(
         map(() => {
           return true; // Return true on success
         }),
         catchError((error) => {
-          console.error('Error adding client:', error);
+          console.error('Error adding user:', error);
           return of(false); // Return false on error
         })
       );
   }
 
   findByClientId(id: number) {
-    return this.clientsService.findByClientId(id).pipe(
-      map((clientData) => {
-        this.clientData = clientData;
+    return this.usersService.findByUserId(id).pipe(
+      map((userData) => {
+        this.userData = userData;
         this.mode = FormMode.EDIT;
-        return clientData; // Return true on success
+        return userData; // Return true on success
       })
     );
   }
@@ -74,9 +74,5 @@ export class UserRepository {
       case FormMode.EDIT:
         return this.update();
     }
-  }
-
-  delete(id: number) {
-    this.clientsService.delete(id).subscribe(() => {});
   }
 }

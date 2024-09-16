@@ -4,7 +4,7 @@ export interface User {
   id: number;
   username: string;
   password: string;
-  permissions: null;
+  permissions: number;
   isActive: boolean;
   person: Person;
 }
