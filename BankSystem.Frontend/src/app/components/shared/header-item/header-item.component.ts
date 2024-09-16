@@ -1,6 +1,7 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { HeaderItemService } from 'src/app/services/header-item.service';
 
 @Component({
   selector: 'app-header-item',
@@ -12,18 +13,30 @@ export class HeaderItemComponent implements OnInit, OnDestroy {
   @Input() buttonName: string | undefined = undefined;
   @Input() routerLink: string | any[] | null | undefined = undefined;
   isAddingMode = false;
-  private fragmentSub?: Subscription;
+  private subscriptions: Subscription[] = [];
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute) {}
+  constructor(
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private headerItemService: HeaderItemService
+  ) {}
 
   ngOnInit(): void {
-    this.fragmentSub = this.activatedRoute.fragment.subscribe(
-      (data) => (this.isAddingMode = !!data)
+    this.subscriptions.push(
+      this.activatedRoute.fragment.subscribe(
+        (data) => (this.isAddingMode = !!data)
+      )
+    );
+
+    this.subscriptions.push(
+      this.headerItemService.headerItemName.subscribe((headerName) => {
+        this.titleName = headerName;
+      })
     );
   }
 
   ngOnDestroy(): void {
-    this.fragmentSub?.unsubscribe();
+    this.subscriptions.forEach((sub) => sub.unsubscribe());
   }
 
   onClick() {

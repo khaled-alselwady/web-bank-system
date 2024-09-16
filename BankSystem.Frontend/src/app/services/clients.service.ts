@@ -38,6 +38,12 @@ export class ClientsService {
       .pipe(catchError(this.handleError));
   }
 
+  update(id: number, clientData: AddEditClient) {
+    return this.http
+      .put<Client>(`${this.baseUrl}${id}`, clientData)
+      .pipe(catchError(this.handleError));
+  }
+
   delete(id: number) {
     return this.http
       .delete(`${this.baseUrl}${id}`)

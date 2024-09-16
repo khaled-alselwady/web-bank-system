@@ -32,6 +32,7 @@ import { ErrorMessageInputComponent } from './components/shared/error-message-in
 import { AddEditClientComponent } from './components/clients/add-edit-client/add-edit-client.component';
 import { StatueColorPipe } from './pipes/status-color.pipe';
 import { AlertComponent } from './components/shared/alert/alert.component';
+import { HeaderItemService } from './services/header-item.service';
 
 @NgModule({
   declarations: [
@@ -71,6 +72,7 @@ import { AlertComponent } from './components/shared/alert/alert.component';
     UsersService,
     UsersDataService,
     FormService,
+    HeaderItemService,
   ],
   bootstrap: [AppComponent],
 })
