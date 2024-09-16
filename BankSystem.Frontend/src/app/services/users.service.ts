@@ -2,15 +2,20 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from '../models/user/user.model';
 import { throwError } from 'rxjs/internal/observable/throwError';
-import { catchError } from 'rxjs/operators';
+import { catchError, take } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { UserView } from '../models/user/user-view.model';
 import { AddEditUser } from '../models/user/add-edit-user.model';
+import { Subject } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class UsersService {
   private baseUrl = 'http://localhost:5006/api/users/';
   currentUser: User | undefined = undefined;
+  allDataInPage$ = new Subject<UserView[]>();
+  countUsers$ = new Subject<number>();
+  refreshClients$ = new Subject<void>();
+
   constructor(private http: HttpClient, private router: Router) {}
 
   fetchAll() {
@@ -88,5 +93,22 @@ export class UsersService {
 
     errorMessage = error.error.message;
     return throwError(errorMessage);
+  }
+
+  private getCountUsers() {
+    this.count()
+      .pipe(take(1))
+      .subscribe((count) => {
+        this.countUsers$.next(count);
+      });
+  }
+
+  fetchData(pageData: { pageNumber: number; pageSize: number }) {
+    this.pagerUsersByPageNumber(pageData.pageNumber, pageData.pageSize)
+      .pipe(take(1))
+      .subscribe((data) => {
+        this.allDataInPage$.next(data);
+        this.getCountUsers();
+      });
   }
 }

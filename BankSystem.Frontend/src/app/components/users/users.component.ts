@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import type { UserView } from 'src/app/models/user/user-view.model';
 import { Subject, Subscription } from 'rxjs';
-import { UsersDataService } from 'src/app/services/users-data.service';
 import { take } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
+import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-users',
@@ -43,7 +43,7 @@ export class UsersComponent implements OnInit, OnDestroy {
   isAddingMode = false;
 
   constructor(
-    private usersServiceData: UsersDataService,
+    private usersService: UsersService,
     private router: Router,
     private activatedRoute: ActivatedRoute
   ) {}
@@ -57,11 +57,11 @@ export class UsersComponent implements OnInit, OnDestroy {
       })
     );
 
-    // this.subscriptions.push(
-    //   this.usersServiceData.refreshClients$.subscribe(() => {
-    //     this.initialDataSubscription();
-    //   })
-    // );
+    this.subscriptions.push(
+      this.usersService.refreshClients$.subscribe(() => {
+        this.initialDataSubscription();
+      })
+    );
   }
 
   ngOnDestroy(): void {
@@ -74,14 +74,14 @@ export class UsersComponent implements OnInit, OnDestroy {
       pageSize: 10,
     }
   ) {
-    this.usersServiceData.fetchData(event);
+    this.usersService.fetchData(event);
 
-    const dataSub = this.usersServiceData.allDataInPage$
+    const dataSub = this.usersService.allDataInPage$
       .pipe(take(1))
       .subscribe((data) => {
         this.usersData$.next(data);
       });
-    const countSub = this.usersServiceData.countUsers$
+    const countSub = this.usersService.countUsers$
       .pipe(take(1))
       .subscribe((count) => {
         this.usersCount$.next(count);

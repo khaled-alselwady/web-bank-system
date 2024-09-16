@@ -44,7 +44,7 @@ export class AddEditUserComponent implements OnInit {
     this.activatedRoute.params.subscribe({
       next: (params) => {
         this.userId = params['userId'];
-        this.fillClientFields();
+        this.fillUserFields();
       },
     });
 
@@ -59,7 +59,7 @@ export class AddEditUserComponent implements OnInit {
     });
   }
 
-  private fillClientFields() {
+  private fillUserFields() {
     if (!this.userId) {
       return;
     }
@@ -80,11 +80,11 @@ export class AddEditUserComponent implements OnInit {
         person: this.personInfo,
       };
 
-      this.saveClient();
+      this.saveUser();
     }
   }
 
-  private saveClient() {
+  private saveUser() {
     this.userRepository.save().subscribe(
       (result) => {
         this.alertComponent?.show('User saved successfully', 'success');
@@ -101,7 +101,7 @@ export class AddEditUserComponent implements OnInit {
   }
 
   onCancel() {
-    // this.clientsDataService.refreshClients$.next(); // raise the event to call subscribers
+    this.usersService.refreshClients$.next(); // raise the event to call subscribers
     this.router.navigate(['../'], { relativeTo: this.activatedRoute });
   }
 
