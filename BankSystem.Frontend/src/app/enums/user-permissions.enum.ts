@@ -1,0 +1,17 @@
+export enum UserPermissions {
+  ADMIN = -1,
+
+  SHOW_CLIENTS = 1,
+  ADD_NEW_CLIENT = 2,
+  UPDATE_CLIENT = 4,
+  REMOVE_CLIENT = 8,
+
+  SHOW_USERS = 16,
+  ADD_NEW_USER = 32,
+  UPDATE_USER = 64,
+  REMOVE_USER = 128,
+
+  SHOW_TRANSACTIONS = 256,
+
+  SHOW_LOGIN_REGISTERS = 512,
+}
