@@ -44,6 +44,12 @@ export class ClientsService {
       .pipe(catchError(this.handleError));
   }
 
+  findByClientId(id: number) {
+    return this.http
+      .get<Client>(`${this.baseUrl}findByClientId/${id}`)
+      .pipe(catchError(this.handleError));
+  }
+
   // Error handling
   private handleError(error: HttpErrorResponse) {
     let errorMessage = 'Unknown error!';

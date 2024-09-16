@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FormMode } from 'src/app/enums/form-mode.enum';
 import { AddEditClient } from 'src/app/models/client/add-edit-client.model';
 import { ClientsDataService } from 'src/app/services/clients-data.service';
 import { ClientsService } from 'src/app/services/clients.service';
@@ -15,6 +16,7 @@ export class AddEditClientComponent implements OnInit {
   clientInfoForm!: FormGroup;
   isPersonFormValid = false;
   personInfo: any;
+  private formMode: FormMode = FormMode.ADD;
 
   constructor(
     private fb: FormBuilder,
