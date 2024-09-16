@@ -10,7 +10,9 @@ export class AlertComponent {
   @Input() type: 'success' | 'error' = 'success';
   isVisible: boolean = false;
 
-  show() {
+  show(message: string, type: 'success' | 'error') {
+    this.message = message;
+    this.type = type;
     this.isVisible = true;
     setTimeout(() => (this.isVisible = false), 3000); // Auto-hide after 3 seconds
   }

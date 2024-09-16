@@ -1,16 +1,19 @@
 .notification {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   padding: 1rem 1.5rem;
   border-radius: 5px;
   font-size: 1rem;
   color: #fff;
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
+  text-align: center;
+  z-index: 1000; // Ensure it appears above other content
   opacity: 0;
   visibility: hidden;
-  transform: translateY(20px);
-  transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
 
+  // Success and error styling
   &.success {
     background-color: #4caf50; // Green for success
   }
@@ -23,6 +26,5 @@
   &.show {
     opacity: 1;
     visibility: visible;
-    transform: translateY(0);
   }
 }

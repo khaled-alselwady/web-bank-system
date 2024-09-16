@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormMode } from 'src/app/enums/form-mode.enum';
@@ -6,6 +6,7 @@ import { AddEditClient } from 'src/app/models/client/add-edit-client.model';
 import { ClientsDataService } from 'src/app/services/clients-data.service';
 import { ClientsService } from 'src/app/services/clients.service';
 import { FormService } from 'src/app/services/form.service';
+import { AlertComponent } from '../../shared/alert/alert.component';
 
 @Component({
   selector: 'app-add-edit-client',
@@ -17,6 +18,7 @@ export class AddEditClientComponent implements OnInit {
   isPersonFormValid = false;
   personInfo: any;
   private formMode: FormMode = FormMode.ADD;
+  @ViewChild(AlertComponent) alertComponent!: AlertComponent;
 
   constructor(
     private fb: FormBuilder,
@@ -66,10 +68,20 @@ export class AddEditClientComponent implements OnInit {
         isActive: this.clientInfoForm.value.isActive,
         person: this.personInfo,
       };
-      this.clientsService.add(clientData).subscribe((newClient) => {
-        this.onCancel();
-      });
+      this.clientsService.add(clientData).subscribe(
+        (newClient) => {
+          this.alertComponent?.show('Client saved successfully', 'success');
+          
+        },
+        (err) => {
+          this.alertComponent?.show('Failed to add client.', 'error');
+        }
+      );
     } else {
+      this.alertComponent?.show(
+        'Please fill out all required fields.',
+        'error'
+      );
       this.clientInfoForm.markAllAsTouched(); // This will trigger validation messages
     }
   }
