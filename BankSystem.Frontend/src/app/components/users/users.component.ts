@@ -3,6 +3,7 @@ import type { UserView } from 'src/app/models/user/user-view.model';
 import { Subject, Subscription } from 'rxjs';
 import { UsersDataService } from 'src/app/services/users-data.service';
 import { take } from 'rxjs/operators';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-users',
@@ -29,17 +30,38 @@ export class UsersComponent implements OnInit, OnDestroy {
     'Email',
     'Status',
   ];
+  actions = {
+    update: (element: UserView) => this.updateRow(element),
+    remove: (element: UserView) => this.removeRow(element),
+  };
 
   usersData: UserView[] = [];
   usersData$ = new Subject<UserView[]>();
   usersCount$ = new Subject<number>();
 
   subscriptions: Subscription[] = [];
+  isAddingMode = false;
 
-  constructor(private usersServiceData: UsersDataService) {}
+  constructor(
+    private usersServiceData: UsersDataService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.initialDataSubscription();
+
+    this.subscriptions.push(
+      this.activatedRoute.fragment.subscribe((fragment) => {
+        this.isAddingMode = !!fragment;
+      })
+    );
+
+    // this.subscriptions.push(
+    //   this.usersServiceData.refreshClients$.subscribe(() => {
+    //     this.initialDataSubscription();
+    //   })
+    // );
   }
 
   ngOnDestroy(): void {
@@ -73,7 +95,10 @@ export class UsersComponent implements OnInit, OnDestroy {
   }
 
   updateRow(element: UserView) {
-    console.log(element);
+    this.router.navigate([element.id], {
+      relativeTo: this.activatedRoute,
+      fragment: 'editing',
+    });
   }
 
   removeRow(element: UserView) {

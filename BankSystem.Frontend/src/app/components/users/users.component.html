@@ -8,14 +8,18 @@
   </div>
 
   <app-data-grid
+    *ngIf="!isAddingMode"
     [categoriesForFiltering]="catagoriesForFiltering"
     [displayedColumns]="displayedColumnsName"
     [dataSource$]="usersData$"
-    [actions]="{
-      update: updateRow,
-      remove: removeRow
-    }"
+    [actions]="actions"
   ></app-data-grid>
 
-  <app-paginator [totalRecords$]="usersCount$" (changeData)="onChangeDataByPaginator($event)"></app-paginator>
+  <app-paginator
+    *ngIf="!isAddingMode"
+    [totalRecords$]="usersCount$"
+    (changeData)="onChangeDataByPaginator($event)"
+  ></app-paginator>
+
+  <router-outlet></router-outlet>
 </section>

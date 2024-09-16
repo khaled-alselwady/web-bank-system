@@ -1,0 +1,185 @@
+// Define colors and variables for styling
+$form-bg: #ffffff;
+$border-color: #ddd;
+$highlight-color: #3f51b5;
+$error-color: #f44336;
+$success-color: #4caf50;
+
+.form-section {
+  background-color: $form-bg;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+
+  h3 {
+    color: $highlight-color;
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid $highlight-color;
+    padding-bottom: 0.5rem;
+    font-weight: 600;
+  }
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    position: relative;
+
+    @media (max-width: 600px) {
+      grid-template-columns: 1fr;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+
+      label {
+        font-size: 1rem;
+        color: $highlight-color;
+      }
+
+      input[type="text"],
+      input[type="email"],
+      input[type="tel"] {
+        padding: 0.5rem;
+        border-radius: 4px;
+        border: 1px solid $border-color;
+        background-color: $form-bg;
+        font-size: 1rem;
+        width: 100%;
+      }
+
+      input.ng-invalid.ng-touched:not([type="email"]) {
+        border-color: $error-color;
+      }
+
+      input.ng-invalid.ng-touched:not([type="email"])::placeholder {
+        color: $error-color;
+      }
+
+      .text-input {
+        width: 100%;
+        padding: 0.5rem;
+        border-radius: 4px;
+        border: 1px solid $border-color;
+        background-color: $form-bg;
+        font-size: 1rem;
+      }
+
+      .active-checkbox {
+        margin-top: 0.5rem;
+      }
+
+      input[type="radio"] {
+        margin-right: 0.5rem;
+      }
+
+      .error-message {
+        color: $error-color;
+        font-size: 0.7rem;
+        margin-top: 0.5rem;
+        color: red;
+      }
+    }
+
+    button {
+      font: inherit;
+      cursor: pointer;
+      border: none;
+      padding: 0.5rem 1.5rem;
+      border-radius: 4px;
+      margin-left: 0.8rem;
+      transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+    }
+
+    button[type="submit"] {
+      background-color: $highlight-color;
+      color: white;
+      padding: 0.6rem 1.8rem;
+      border-radius: 5px;
+      border: 1px solid transparent;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease,
+        transform 0.2s ease;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      font-weight: 500;
+
+      &:hover {
+        background-color: darken($highlight-color, 10%);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        transform: translateY(-2px); // Slight lift effect
+      }
+
+      &:active {
+        transform: translateY(0); // Reset lift on click
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      }
+    }
+
+    button[type="reset"] {
+      background-color: #ccc;
+      color: black;
+      padding: 0.6rem 1.8rem;
+      border-radius: 5px;
+      border: 1px solid transparent;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease,
+        transform 0.2s ease;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      font-weight: 500;
+
+      &:hover {
+        background-color: lighten(#ccc, 10%);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        transform: translateY(-2px); // Slight lift effect
+      }
+
+      &:active {
+        transform: translateY(0); // Reset lift on click
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      }
+    }
+
+    .cancel-button {
+      background-color: transparent;
+      color: $highlight-color;
+      padding: 0.6rem 1.8rem;
+      border: 1px solid $highlight-color;
+      border-radius: 5px;
+      transition: background-color 0.3s ease, color 0.3s ease,
+        transform 0.2s ease;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      font-weight: 500;
+
+      &:hover {
+        background-color: lighten($highlight-color, 40%);
+        color: darken($highlight-color, 20%);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        transform: translateY(-2px); // Slight lift effect
+      }
+
+      &:active {
+        transform: translateY(0); // Reset lift on click
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      }
+    }
+  }
+  .actions {
+    grid-column: 3 / 2;
+    justify-self: end;
+
+    .disabled-submit-button {
+      background-color: #6d6d6d !important;
+      pointer-events: none;
+    }
+  }
+  // Responsive design
+  @media (max-width: 600px) {
+    padding: 1rem;
+
+    h3 {
+      font-size: 1.5rem;
+    }
+  }
+}

@@ -5,6 +5,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ClientsComponent } from './components/clients/clients.component';
 import { UsersComponent } from './components/users/users.component';
 import { AddEditClientComponent } from './components/clients/add-edit-client/add-edit-client.component';
+import { AddEditUserComponent } from './components/users/add-edit-user/add-edit-user.component';
 
 const appRoutes: Routes = [
   { path: '', component: MainStartupComponent },
@@ -23,7 +24,20 @@ const appRoutes: Routes = [
       },
     ],
   },
-  { path: 'users', component: UsersComponent },
+  {
+    path: 'users',
+    component: UsersComponent,
+    children: [
+      {
+        path: 'new',
+        component: AddEditUserComponent,
+      },
+      {
+        path: ':userId',
+        component: AddEditUserComponent,
+      },
+    ],
+  },
   { path: '**', component: MainStartupComponent },
 ];
 

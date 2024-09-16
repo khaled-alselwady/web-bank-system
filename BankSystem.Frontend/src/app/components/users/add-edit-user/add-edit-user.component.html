@@ -1,1 +1,102 @@
-<p>add-edit-user works!</p>
+<app-add-edit-person
+  (valid)="onPersonFormStatusChanged($event)"
+></app-add-edit-person>
+
+<app-alert class="alert"></app-alert>
+
+<section class="form-section">
+  <h3>User Information</h3>
+
+  <form [formGroup]="userInfoForm" class="form-grid" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input
+        id="username"
+        formControlName="username"
+        placeholder="Enter Username"
+        class="text-input"
+      />
+      <span
+        *ngIf="
+          userInfoForm?.get('username')?.invalid &&
+          userInfoForm?.get('username')?.touched
+        "
+      >
+        <app-error-message-input
+          errorMessage="Username is required"
+        ></app-error-message-input>
+      </span>
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input
+        id="password"
+        type="password"
+        formControlName="password"
+        placeholder="Enter Password"
+        class="text-input"
+      />
+      <span
+        *ngIf="
+          userInfoForm?.get('password')?.invalid &&
+          userInfoForm?.get('password')?.touched
+        "
+      >
+        <app-error-message-input
+          errorMessage="Password is required"
+        ></app-error-message-input>
+      </span>
+    </div>
+
+    <div class="form-group">
+      <label for="permissions">Permissions</label>
+      <input
+        id="permissions"
+        type="number"
+        formControlName="permissions"
+        placeholder="Enter Permissions"
+        class="text-input"
+      />
+      <span
+        *ngIf="
+          userInfoForm?.get('permissions')?.invalid &&
+          userInfoForm?.get('permissions')?.touched
+        "
+      >
+        <app-error-message-input
+          errorMessage="Permissions is required"
+        ></app-error-message-input>
+      </span>
+    </div>
+
+    <div class="form-group">
+      <label for="isActive">Active Status</label>
+      <div class="active-checkbox">
+        <input id="isActive" type="checkbox" formControlName="isActive" />
+        <span
+          [ngStyle]="{
+            color: userInfoForm.get('isActive')?.value
+              ? 'rgb(0, 215, 86)'
+              : 'rgb(215, 0, 0)'
+          }"
+        >
+          {{ userInfoForm.get("isActive")?.value ? "Active" : "Inactive" }}
+        </span>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button class="cancel-button" (click)="onCancel()">Cancel</button>
+      <button type="reset" (click)="onReset()">Reset</button>
+      <button
+        type="submit"
+        [ngClass]="{
+          'disabled-submit-button': userInfoForm.invalid || !isPersonFormValid
+        }"
+      >
+        Save
+      </button>
+    </div>
+  </form>
+</section>
