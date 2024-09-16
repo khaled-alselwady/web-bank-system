@@ -6,6 +6,8 @@ import { FormService } from 'src/app/services/form.service';
 import { UsersService } from 'src/app/services/users.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HeaderItemService } from 'src/app/services/header-item.service';
+import { PermissionsService } from 'src/app/services/permissions.service';
+import { UserPermissions } from 'src/app/enums/user-permissions.enum';
 
 @Component({
   selector: 'app-add-edit-user',
@@ -20,6 +22,7 @@ export class AddEditUserComponent implements OnInit {
   @ViewChild(AlertComponent) alertComponent!: AlertComponent;
 
   userRepository: UserRepository = new UserRepository(this.usersService);
+  permissionsOptions: string[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -27,7 +30,8 @@ export class AddEditUserComponent implements OnInit {
     private usersService: UsersService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private headerItemService: HeaderItemService
+    private headerItemService: HeaderItemService,
+    private permissionsService: PermissionsService
   ) {}
   ngOnDestroy(): void {
     this.headerItemService.headerItemName.next('Manage Users');
@@ -52,6 +56,8 @@ export class AddEditUserComponent implements OnInit {
       isActive: [true],
     });
 
+    this.fillPermissionsArray();
+
     this.activatedRoute.params.subscribe({
       next: (params) => {
         this.userId = params['userId'];
@@ -65,8 +71,30 @@ export class AddEditUserComponent implements OnInit {
         this.userRepository = new UserRepository(this.usersService);
       } else {
         this.headerItemService.headerItemName.next('Update New User');
-        this.userRepository.findByClientId(this.userId!).subscribe();
+        this.userRepository.findByClientId(this.userId!).subscribe((user) => {
+          this.selectCorrectPermissions(user.permissions);
+        });
       }
+    });
+  }
+
+  private fillPermissionsArray() {
+    // this.permissionsOptions = [
+    //   'showClients',
+    //   'addNewClient',
+    //   'updateClient',
+    //   'removeClient',
+    //   'showUsers',
+    //   'addNewUser',
+    //   'updateUser',
+    //   'removeUser',
+    //   'showTransactions',
+    //   'showLoginRegisters',
+    // ];
+    const permissions = this.userInfoForm.controls['permissions'] as FormGroup;
+
+    Object.keys(permissions.controls)?.forEach((key) => {
+      this.permissionsOptions.push(key);
     });
   }
 
@@ -144,7 +172,47 @@ export class AddEditUserComponent implements OnInit {
     }
   }
 
-  selectCorrectPermissions(permissions: number) {
-    
+  private getPermissionsItemValue(permissionItemName: string) {
+    switch (permissionItemName) {
+      case 'showClients':
+        return UserPermissions.SHOW_CLIENTS;
+      case 'addNewClient':
+        return UserPermissions.ADD_NEW_CLIENT;
+      case 'updateClient':
+        return UserPermissions.UPDATE_CLIENT;
+      case 'removeClient':
+        return UserPermissions.REMOVE_CLIENT;
+      case 'showUsers':
+        return UserPermissions.SHOW_USERS;
+      case 'addNewUser':
+        return UserPermissions.ADD_NEW_USER;
+      case 'updateUser':
+        return UserPermissions.UPDATE_USER;
+      case 'removeUser':
+        return UserPermissions.REMOVE_USER;
+      case 'showTransactions':
+        return UserPermissions.SHOW_TRANSACTIONS;
+      case 'showLoginRegisters':
+        return UserPermissions.SHOW_LOGIN_REGISTERS;
+      default:
+        return 0;
+    }
+  }
+
+  selectCorrectPermissions(permissionsUser: number) {
+    const permissions = this.userInfoForm.controls['permissions'] as FormGroup;
+
+    this.permissionsOptions.forEach((option) => {
+      if (permissionsUser === -1) {
+        permissions.get(option)?.setValue(true);
+      } else {
+        const permissionItem = +this.getPermissionsItemValue(option);
+        if (
+          this.permissionsService.canAccess(permissionItem, permissionsUser)
+        ) {
+          permissions.get(option)?.setValue(true);
+        }
+      }
+    });
   }
 }
