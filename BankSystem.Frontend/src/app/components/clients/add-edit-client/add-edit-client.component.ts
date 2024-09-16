@@ -34,6 +34,26 @@ export class AddEditClientComponent implements OnInit {
       balance: ['', [Validators.required, Validators.min(0)]],
       isActive: [true],
     });
+
+    this.activatedRoute.fragment.subscribe((fragment) => {
+      if (fragment === 'adding') {
+        this.formMode = FormMode.ADD;
+      } else {
+        this.formMode = FormMode.EDIT;
+      }
+    });
+
+    if (this.formMode === FormMode.EDIT) {
+      this.activatedRoute.params.subscribe({
+        next: (params) => {
+          const clientId = params['clientId'];
+          this.clientsService.findByClientId(clientId).subscribe((client) => {
+            this.clientInfoForm.patchValue(client);
+            this.personInfo = client.person;
+          });
+        },
+      });
+    }
   }
 
   // You can create a method to handle form submission
