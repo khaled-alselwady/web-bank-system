@@ -50,14 +50,122 @@
     </div>
 
     <div class="form-group">
-      <label for="permissions">Permissions</label>
-      <input
+      <!-- <label for="permissions">Permissions</label> -->
+      <!-- <input
         id="permissions"
         type="number"
         formControlName="permissions"
         placeholder="Enter Permissions"
         class="text-input"
-      />
+      /> -->
+
+      <fieldset formGroupName="permissions">
+        <legend>Permissions</legend>
+        <div>
+          <div class="permission-item">
+            <input
+              type="checkbox"
+              formControlName="showClients"
+              value="1"
+              id="show-clients"
+              (change)="onParentCheckboxChange($event, 'clients')"
+            />
+            <label for="show-clients">Show Clients</label>
+          </div>
+          <div class="permission-item">
+            <input
+              type="checkbox"
+              formControlName="addNewClient"
+              value="1"
+              id="add-new-client"
+            />
+            <label for="add-new-client">Add New Client</label>
+          </div>
+          <div class="permission-item">
+            <input
+              type="checkbox"
+              formControlName="updateClient"
+              value="1"
+              id="update-client"
+            />
+            <label for="update-client">Update Client</label>
+          </div>
+          <div class="permission-item">
+            <input
+              type="checkbox"
+              formControlName="removeClient"
+              value="1"
+              id="remove-client"
+            />
+            <label for="remove-client">Remove Client</label>
+          </div>
+        </div>
+
+        <div>
+          <div class="permission-item">
+            <input
+              type="checkbox"
+              formControlName="showUsers"
+              value="2"
+              id="show-users"
+              (change)="onParentCheckboxChange($event, 'users')"
+            />
+            <label for="show-users">Show Users</label>
+          </div>
+          <div class="permission-item">
+            <input
+              type="checkbox"
+              formControlName="addNewUser"
+              value="1"
+              id="add-new-user"
+            />
+            <label for="add-new-user">Add New User</label>
+          </div>
+          <div class="permission-item">
+            <input
+              type="checkbox"
+              formControlName="updateUser"
+              value="1"
+              id="update-user"
+            />
+            <label for="update-user">Update User</label>
+          </div>
+          <div class="permission-item">
+            <input
+              type="checkbox"
+              formControlName="removeUser"
+              value="1"
+              id="remove-user"
+            />
+            <label for="remove-user">Remove User</label>
+          </div>
+        </div>
+
+        <div>
+          <div class="permission-item">
+            <input
+              type="checkbox"
+              formControlName="showTransactions"
+              value="3"
+              id="show-transactions"
+            />
+            <label for="show-transactions">Show Transactions</label>
+          </div>
+        </div>
+
+        <div>
+          <div class="permission-item">
+            <input
+              type="checkbox"
+              formControlName="showLoginRegisters"
+              value="4"
+              id="show-login-registers"
+            />
+            <label for="show-login-registers">Show Login Registers</label>
+          </div>
+        </div>
+      </fieldset>
+
       <span
         *ngIf="
           userInfoForm?.get('permissions')?.invalid &&

@@ -37,7 +37,18 @@ export class AddEditUserComponent implements OnInit {
     this.userInfoForm = this.fb.group({
       username: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(4)]],
-      permissions: ['', [Validators.required, Validators.min(-1)]],
+      permissions: this.fb.group({
+        showClients: [false],
+        addNewClient: [false],
+        updateClient: [false],
+        removeClient: [false],
+        showUsers: [false],
+        addNewUser: [false],
+        updateUser: [false],
+        removeUser: [false],
+        showTransactions: [false],
+        showLoginRegisters: [false],
+      }),
       isActive: [true],
     });
 
@@ -108,5 +119,28 @@ export class AddEditUserComponent implements OnInit {
   onPersonFormStatusChanged(event: { isValid: boolean; personInfo: any }) {
     this.isPersonFormValid = event.isValid;
     this.personInfo = event.personInfo;
+  }
+
+  onParentCheckboxChange(event: Event, groupName: string) {
+    const target = event.target as HTMLInputElement;
+    const isChecked = target.checked;
+
+    // if the `show` entity is selected, so I don't want to do anything, but if it is unselected, then I want to unselect all its children
+    if (isChecked) {
+      return;
+    }
+
+    // Update child checkboxes based on parent checkbox status
+    const controls = this.userInfoForm.controls['permissions'] as FormGroup;
+
+    if (groupName === 'clients') {
+      ['addNewClient', 'updateClient', 'removeClient'].forEach((id) => {
+        controls.get(id)?.setValue(isChecked);
+      });
+    } else if (groupName === 'users') {
+      ['addNewUser', 'updateUser', 'removeUser'].forEach((id) => {
+        controls.get(id)?.setValue(isChecked);
+      });
+    }
   }
 }
