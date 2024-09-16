@@ -33,6 +33,7 @@ import { AddEditClientComponent } from './components/clients/add-edit-client/add
 import { StatueColorPipe } from './pipes/status-color.pipe';
 import { AlertComponent } from './components/shared/alert/alert.component';
 import { HeaderItemService } from './services/header-item.service';
+import { AddEditUserComponent } from './components/users/add-edit-user/add-edit-user.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { HeaderItemService } from './services/header-item.service';
     ErrorMessageInputComponent,
     AddEditClientComponent,
     AlertComponent,
+    AddEditUserComponent,
   ],
   imports: [
     BrowserModule,
